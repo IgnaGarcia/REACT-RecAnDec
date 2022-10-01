@@ -3,9 +3,16 @@
 ## Comandos
 
 ## Historial de Comandos Ejecutados
+Create React App
 ```
 npx create-react-app react-rec-an-dec
 ```
+[Tailwind](https://tailwindcss.com/docs/guides/create-react-app)
+```
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
 
 ## TO-DO List
 - Configuracion Inicial  
