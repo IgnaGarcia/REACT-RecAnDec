@@ -15,15 +15,10 @@ npx tailwindcss init -p
 
 
 ## TO-DO List
-- Configuracion Inicial  
-    - Scaffolding  
-    - Tailwind  
-    - react-router  
 - Interfaz Conetendora
-    - Theme
-    - ThemeContext
     - Sidebar con Navegacion
     - Form de Registrar Ingreso/Egreso
+    - Main Container
 - Login/Signin
     - Pagina 
     - Form Login(Basico)
