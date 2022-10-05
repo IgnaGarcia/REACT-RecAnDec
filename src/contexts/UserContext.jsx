@@ -8,15 +8,13 @@ const UserProvider = ({ children }) => {
         return JSON.parse(storagedUser)
     });
 
-
-    const contx = {
-        user,
-        saveUser: (data, token) => {
-            let input = {...data, token}
-            setUser(input)
-            window.localStorage.setItem("user", JSON.stringify(input))
-        }
+    const saveUser = (data, token) => {
+        let input = {...data, token}
+        setUser(input)
+        window.localStorage.setItem("user", JSON.stringify(input))
     }
+
+    const contx = { user, saveUser }
 
     return (
         <UserContext.Provider value={ contx } >

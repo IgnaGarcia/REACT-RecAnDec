@@ -1,9 +1,18 @@
 import React from 'react'
 import { useContext } from 'react'
 import { UserContext } from '../../contexts/UserContext'
+import { getCategories } from '../../api/CategoriesService'
+import { getTags } from '../../api/TagsService'
+import { getWallets } from '../../api/WalletService'
+import { useState } from 'react'
+import { useEffect } from 'react'
+import { useFetch } from '../../hooks/useFetch'
 
 export const Footer = () => {
     const { user, saveUser } = useContext(UserContext)
+    const { categories, categoriesError } = useFetch(getCategories(user))
+    const { tags, tagsError } = useFetch(getTags(user))
+    const { wallets, walletsError } = useFetch(getWallets(user))
 
     return (
         <footer className="flex items-center fixed w-screen bottom-0 h-16">

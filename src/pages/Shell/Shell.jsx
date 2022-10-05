@@ -1,18 +1,28 @@
 import React, { useContext } from 'react'
 import { BrowserRouter } from "react-router-dom"
+import { generateToken, refreshToken } from '../../api/UserService';
 import { UserContext } from '../../contexts/UserContext';
+import { invalidToken } from '../../utils/utils';
 import { LogedShell } from './LogedShell'
 
 export const Shell = () => {
     const { user, saveUser } = useContext(UserContext)
 
-    const setUser = () => {
+    const setUser = async() => {
+        let token = await generateToken(process.env.REACT_APP_USER_ID)
         saveUser({
             "name": "Igna Garcia",
             "telegramId": "982840555",
             "_id": process.env.REACT_APP_USER_ID
-        }, process.env.REACT_APP_USER_TOKEN)
+        }, token)
     }
+
+    const updateUser = async() => {
+        let body = await refreshToken(user)
+        saveUser(body.data, body.token)
+    }
+
+    if (user && user.token && invalidToken(user)) updateUser()
 
     return (
         <BrowserRouter className='flex'>
