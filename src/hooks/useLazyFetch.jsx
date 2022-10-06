@@ -1,10 +1,14 @@
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
  
-export const useFetch = ({ url, options }) => {
+export const useLazyFetch = () => {
+    const [request, setRequest] = useState({
+        url: null,
+        options: null
+    })
+
     const [status, setStatus] = useState({
         data: null,
-        loading: true,
+        loading: false,
         error: null
     })
 
@@ -16,9 +20,12 @@ export const useFetch = ({ url, options }) => {
         })
 
         try {
-            const resp = await fetch(url, options)
-            if(!resp.ok) throw Error(resp.status)
+            const resp = await fetch(request.url, request.options)
             const data = await resp.json()
+            if(!resp.ok) {
+                console.log(data)
+                throw Error(data.message)
+            }
 
             setStatus({
                 data,
@@ -32,15 +39,22 @@ export const useFetch = ({ url, options }) => {
                 loading: false,
                 error
             })
-        }
+        } 
     }
 
     useEffect(() => {
-        console.log(`Calling: ${url}`)
-        getFetch(url)
-    }, [url])
+        if(request.options != null && request.url != null){
+            console.log(`Calling: ${request.url}`)
+            getFetch()
+        }
+    }, [request])
+
+    const run = (data) => {
+        setRequest(data)
+    }
 
     return {
+        run,
         body:       status.data,
         loading:    status.loading,
         error:      status.error
