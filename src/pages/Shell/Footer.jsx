@@ -40,7 +40,6 @@ export const Footer = () => {
     }
 
     useEffect(() => {
-        console.log("USE Effect", recordResponse)
         if(!recordResponse.loading && (recordResponse.error || recordResponse.body)){
             if (recordResponse.error) {
                 alert("Error al Enviar");

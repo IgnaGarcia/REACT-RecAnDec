@@ -7,7 +7,6 @@ export const useForm = (form = {}) => {
         const { name, value, type, checked } = target
         formState[name] = type === "checkbox" ? checked : value
         setFormState({...formState, [name]: formState[name]})
-        console.log(formState)
     }
 
     const reset = () => {

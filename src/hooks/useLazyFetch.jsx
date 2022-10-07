@@ -22,16 +22,14 @@ export const useLazyFetch = () => {
         try {
             const resp = await fetch(request.url, request.options)
             const data = await resp.json()
-            if(!resp.ok) {
-                console.log(data)
-                throw Error(data.message)
-            }
+            if(!resp.ok) throw Error(data.message)
 
             setStatus({
                 data,
                 loading: false,
                 error: null
             })
+            console.log(`Called Successfully: ${data.message}`)
         } catch(error) {
             console.error(error)
             setStatus({

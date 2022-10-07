@@ -24,6 +24,7 @@ export const useFetch = ({ url, options }) => {
                 loading: false,
                 error: null
             })
+            console.log(`Called Successfully: ${data.message}`)
         } catch(error) {
             console.error(error)
             setStatus({

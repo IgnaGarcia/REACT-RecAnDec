@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { UserContext } from '../contexts/UserContext';
 import { useFetch } from '../hooks/useFetch';
@@ -6,7 +6,6 @@ import { getHistorical } from '../api/RecordService';
 import { getRandomColor } from '../utils/utils';
 
 export const LinesPlot = ({ title, groupBy, filterList }) => {
-    console.log("CREATED")
     const { user } = useContext(UserContext)
     const { body, loading } = useFetch(getHistorical(user, groupBy))
     let data = null
