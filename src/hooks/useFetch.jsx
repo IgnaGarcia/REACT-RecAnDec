@@ -1,16 +1,15 @@
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
  
 export const useFetch = ({ url, options }) => {
     const [status, setStatus] = useState({
-        data: null,
+        body: null,
         loading: true,
         error: null
     })
 
     const getFetch = async () => {
         setStatus({
-            data: null,
+            body: null,
             loading: true,
             error: null
         })
@@ -21,14 +20,14 @@ export const useFetch = ({ url, options }) => {
             const data = await resp.json()
 
             setStatus({
-                data,
+                body: data,
                 loading: false,
                 error: null
             })
         } catch(error) {
             console.error(error)
             setStatus({
-                data: null,
+                body: null,
                 loading: false,
                 error
             })
@@ -41,7 +40,7 @@ export const useFetch = ({ url, options }) => {
     }, [url])
 
     return {
-        body:       status.data,
+        body:       status.body,
         loading:    status.loading,
         error:      status.error
     };
