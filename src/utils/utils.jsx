@@ -14,7 +14,7 @@ export const getEndOfMonth = () => {
 
 export const getFisrtOfPreviusMonth = () => {
     let today = new Date()
-    let firstOfPreviusMonth = today.getMonth() == 0? 
+    let firstOfPreviusMonth = today.getMonth() === 0? 
         `${today.getFullYear()-1}-01-01`
         : `${today.getFullYear()}-${today.getMonth()}-01`
     return firstOfPreviusMonth

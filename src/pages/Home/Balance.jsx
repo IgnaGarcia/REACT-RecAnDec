@@ -4,8 +4,8 @@ import { UserContext } from '../../contexts/UserContext';
 import { useFetch } from '../../hooks/useFetch';
 
 export const Balance = () => {
-    const { user, saveUser } = useContext(UserContext)
-    const { loading, body, error } = useFetch(getBalance(user))
+    const { user } = useContext(UserContext)
+    const { loading, body } = useFetch(getBalance(user))
 
     return (
         <>
