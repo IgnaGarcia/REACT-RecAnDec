@@ -56,7 +56,7 @@ export const LinesPlot = ({ title, groupBy, filterList }) => {
                         <Tooltip />
                         <Legend iconType='circle'/>
                         {
-                            names.map((lineName, idx) => <Line key={lineName.name} dataKey={lineName} stroke={getColor(idx)} type="monotone" /> )
+                            names.map((lineName, idx) => <Line key={`line-${lineName.name}-${idx}`} dataKey={lineName} stroke={getColor(idx)} type="monotone" /> )
                         }
                     </LineChart>
                 </div>

@@ -3,39 +3,28 @@ import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import { UserContext } from '../contexts/UserContext';
 import { useFetch } from '../hooks/useFetch';
 import { getSummary } from '../api/RecordService';
-import { getColor, getRandomColor } from '../utils/utils';
+import { getColor, renderCustomizedLabel } from '../utils/utils';
 
 export const PiePlot = ({ title, groupBy, filterList }) => {
     const { user } = useContext(UserContext)
     const { body, loading } = useFetch(getSummary(user, groupBy))
+    let data = null
+    let names = []
 
-    const data = [
-        { name: 'Group A', value: 400 },
-        { name: 'Group B', value: 300 },
-        { name: 'Group C', value: 300 },
-        { name: 'Group D', value: 200 },
-        { name: 'Group E', value: 278 },
-        { name: 'Group F', value: 189 },
-    ];
-
-    const RADIAN = Math.PI / 180;
-    const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-        const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-        const x = cx + radius * Math.cos(-midAngle * RADIAN);
-        const y = cy + radius * Math.sin(-midAngle * RADIAN);
-      
-        return (
-          <text x={x} y={y} fill="white" textAnchor='middle' dominantBaseline="central">
-            {`${(percent * 100).toFixed(0)}%`}
-          </text>
-        );
-    };
+    const mapSummary = () => {
+        names = []
+        data = body.data.map(el => {
+            names.push(el._id.label)
+            return { name: el._id.label, value: el.acum }
+        })
+    }
 
     return (
         <>
         {
             loading? "Cargando..." : 
                 <div className='card'>
+                    {mapSummary()}
                     <h2 className='text-xl mb-6'> {title} </h2>
                     <PieChart
                         width={500}
@@ -59,8 +48,8 @@ export const PiePlot = ({ title, groupBy, filterList }) => {
                             labelLine={false}
                             label={renderCustomizedLabel}
                         >
-                            {data.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={getColor(index)} />
+                            {data.map((_, idx) => (
+                                <Cell key={`pie-cell-${idx}`} fill={getColor(idx)} />
                             ))}
                         </Pie>
                     </PieChart>
