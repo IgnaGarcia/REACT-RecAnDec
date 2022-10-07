@@ -13,24 +13,56 @@ export const getEndOfMonth = () => {
     return endOfMonth.toISOString().split('T')[0]
 }
 
+export const getFisrtOfMonth = () => {
+    let today = new Date()
+    let firstOfMonth = today.getMonth() === 0? 
+        `${today.getFullYear()-1}-12-01`
+        : `${today.getFullYear()}-${today.getMonth()+1}-01`
+    return firstOfMonth
+}
+
 export const getFisrtOfPreviusMonth = () => {
     let today = new Date()
     let firstOfPreviusMonth = today.getMonth() === 0? 
-        `${today.getFullYear()-1}-01-01`
+        `${today.getFullYear()-1}-12-01`
         : `${today.getFullYear()}-${today.getMonth()}-01`
     return firstOfPreviusMonth
 }
 
+const colorsArr = [
+    colors.red[400], 
+    colors.blue[400], 
+    colors.emerald[400], 
+    colors.orange[400],
+    colors.cyan[400], 
+    colors.yellow[400], 
+
+    colors.red[700],
+    colors.blue[700],
+    colors.emerald[700],
+    colors.orange[700],
+    colors.cyan[700],
+    colors.yellow[700],
+
+    colors.red[500],
+    colors.blue[500], 
+    colors.emerald[500], 
+    colors.orange[500], 
+    colors.cyan[500], 
+    colors.yellow[500], 
+
+    colors.red[300],
+    colors.blue[300], 
+    colors.emerald[300], 
+    colors.orange[300],
+    colors.cyan[300], 
+    colors.yellow[300], 
+]    
 export const getRandomColor = () => {
-    const colorsArr = [colors.rose[400], colors.rose[700],
-        colors.fuchsia[400], colors.fuchsia[700],
-        colors.blue[400], colors.blue[700],
-        colors.cyan[400], colors.cyan[700],
-        colors.teal[400], colors.teal[700],
-        colors.emerald[400], colors.emerald[700],
-        colors.yellow[400], colors.yellow[700],
-        colors.orange[400], colors.orange[700],
-        colors.red[400], colors.red[700]]
     return colorsArr[Math.floor(Math.random()*colorsArr.length)]
+}
+
+export const getColor = (index) => {
+    return colorsArr[index % colorsArr.length]
 }
 

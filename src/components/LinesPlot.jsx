@@ -3,7 +3,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'r
 import { UserContext } from '../contexts/UserContext';
 import { useFetch } from '../hooks/useFetch';
 import { getHistorical } from '../api/RecordService';
-import { getRandomColor } from '../utils/utils';
+import { getColor } from '../utils/utils';
 
 export const LinesPlot = ({ title, groupBy, filterList }) => {
     const { user } = useContext(UserContext)
@@ -49,21 +49,14 @@ export const LinesPlot = ({ title, groupBy, filterList }) => {
                     <LineChart
                         width={500}
                         height={300}
-                        data={data}
-                        margin={{
-                            top: 5,
-                            right: 30,
-                            left: 20,
-                            bottom: 5
-                        }}
-                        >
+                        data={data}>
                         <CartesianGrid strokeDasharray="50 5" />
                         <XAxis dataKey="name" />
                         <YAxis />
                         <Tooltip />
-                        <Legend />
+                        <Legend iconType='circle'/>
                         {
-                            names.map(lineName => <Line key={lineName.name} dataKey={lineName} stroke={getRandomColor()} type="monotone" /> )
+                            names.map((lineName, idx) => <Line key={lineName.name} dataKey={lineName} stroke={getColor(idx)} type="monotone" /> )
                         }
                     </LineChart>
                 </div>
