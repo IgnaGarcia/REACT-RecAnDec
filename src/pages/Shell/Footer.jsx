@@ -10,7 +10,7 @@ import { getWallets } from '../../api/WalletService'
 import { postRecord } from '../../api/RecordService'
 
 export const Footer = () => {
-    const { user, saveUser } = useContext(UserContext)
+    const { user } = useContext(UserContext)
     const categoryResponse = useFetch(getCategories(user))
     const tagResponse = useFetch(getTags(user))
     const walletResponse = useFetch(getWallets(user))
@@ -26,8 +26,8 @@ export const Footer = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        let wallet = formState.wallet != "" ? formState.wallet : null
-        let tags = formState.tags != "" ? formState.tags : null
+        let wallet = formState.wallet !== "" ? formState.wallet : null
+        let tags = formState.tags !== "" ? formState.tags : null
 
         let req = {
             "amount": formState.amount,
@@ -40,7 +40,6 @@ export const Footer = () => {
     }
 
     useEffect(() => {
-        console.log("USE Effect", recordResponse)
         if(!recordResponse.loading && (recordResponse.error || recordResponse.body)){
             if (recordResponse.error) {
                 alert("Error al Enviar");

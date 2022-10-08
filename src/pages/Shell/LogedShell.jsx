@@ -4,6 +4,7 @@ import { Configuration } from '../Configuration/Configuration'
 import { Records } from '../Records/Records'
 import { Sidebar } from './Sidebar'
 import { Footer } from './Footer'
+import { Home } from '../Home/Home'
 
 export const LogedShell = () => {
     return (
@@ -11,7 +12,7 @@ export const LogedShell = () => {
             <Sidebar />
             <main className='mb-16 ml-60'>
                 <Routes>
-                    <Route exact strict path='' element={ <div>home</div> }/>
+                    <Route exact strict path='' element={ <Home /> }/>
                     <Route exact strict path='registros' element={ <Records /> }>
                         <Route exact strict path='egresos' element={ <div>ingresos</div> }/>
                         <Route exact strict path='ingresos' element={ <div>egresos</div> }/>
