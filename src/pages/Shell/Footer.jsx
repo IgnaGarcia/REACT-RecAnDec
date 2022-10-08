@@ -1,19 +1,14 @@
 import React from 'react'
 import { useContext, useEffect } from 'react'
-import { useFetch } from '../../hooks/useFetch'
 import { useLazyFetch } from '../../hooks/useLazyFetch'
 import { useForm } from '../../hooks/useForm'
 import { UserContext } from '../../contexts/UserContext'
-import { getCategories } from '../../api/CategoriesService'
-import { getTags } from '../../api/TagsService'
-import { getWallets } from '../../api/WalletService'
 import { postRecord } from '../../api/RecordService'
+import { UserConfigContext } from '../../contexts/UserConfigContext'
 
 export const Footer = () => {
     const { user } = useContext(UserContext)
-    const categoryResponse = useFetch(getCategories(user))
-    const tagResponse = useFetch(getTags(user))
-    const walletResponse = useFetch(getWallets(user))
+    const { categories, tags, wallets } = useContext(UserConfigContext)
     const recordResponse = useLazyFetch()
 
     const { formState, onInputChange, reset } = useForm({
@@ -60,48 +55,48 @@ export const Footer = () => {
                     <div>
                         <input type="checkbox" name="isIn" id="isIn" 
                             value={formState.isIn} onChange={onInputChange}/>
-                        <label for="isIn"> Es Ingreso? </label>
+                        <label htmlFor="isIn"> Es Ingreso? </label>
                     </div>
 
                     <input type="number" placeholder="Monto" name="amount" id="amount" min={1}  
                         value={formState.amount} onChange={onInputChange}/>
 
-                    { categoryResponse.loading?
+                    { categories.loading?
                         <span>Cargando...</span>
                         : 
                         <select name="category" id="categorySelector"  required
                             value={formState.category} onChange={onInputChange}>
                             <option value="" disabled> -- Categoria -- </option>
                             {
-                                categoryResponse.body.data.map(el => 
+                                categories.data.map(el => 
                                     <option value={el._id} key={el._id}> {el.label} </option> 
                                 )
                             }
                         </select>
                     }
                     
-                    { tagResponse.loading?
+                    { tags.loading?
                         <span>Cargando...</span>
                         : 
                         <select name="tags" id="tagSelector"
                             value={formState.tags} onChange={onInputChange}>
                             <option value="" disabled> -- Etiquetas -- </option>
                             {
-                                tagResponse.body.data.map(el => 
+                                tags.data.map(el => 
                                     <option value={el._id} key={el._id}> {el.label} </option> 
                                 )
                             }
                         </select>
                     }
 
-                    { walletResponse.loading?
+                    { wallets.loading?
                         <span>Cargando...</span>
                         : 
                         <select name="wallet" id="walletSelector"
                             value={formState.wallet} onChange={onInputChange}>
                             <option value="" disabled> -- Billetera -- </option>
                             {
-                                walletResponse.body.data.map(el => 
+                                wallets.data.map(el => 
                                     <option value={el._id} key={el._id}> {el.label} </option> 
                                 )
                             }
