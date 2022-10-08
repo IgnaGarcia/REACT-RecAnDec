@@ -12,13 +12,15 @@ npx create-react-app react-rec-an-dec
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 ```
+[React Router](https://reactrouter.com/en/main)
+```
+npm install react-router react-router-dom
+```
 
 
 ## TO-DO List
 - Interfaz Conetendora
-    - Sidebar con Navegacion
     - Form de Registrar Ingreso/Egreso
-    - Main Container
 - Login/Signin
     - Pagina 
     - Form Login(Basico)
