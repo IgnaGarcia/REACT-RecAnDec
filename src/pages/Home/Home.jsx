@@ -1,4 +1,5 @@
 import React from 'react'
+import { BarsPlot } from '../../components/BarsPlot';
 import { LinesPlot } from '../../components/LinesPlot';
 import { PiePlot } from '../../components/PiePlot';
 import { Balance } from './Balance'
@@ -24,6 +25,8 @@ export const Home = () => {
                 filterList={null} />
             <LinesPlot title="Historial por Billetera" groupBy="wallet" 
                 filterList={null} />
+
+            <BarsPlot title="Estado de Limites" />
         </div>
     )
 }

@@ -29,12 +29,6 @@ export const PiePlot = ({ title, groupBy, filterList }) => {
                     <PieChart
                         width={500}
                         height={300}
-                        margin={{
-                            top: 5,
-                            right: 30,
-                            left: 20,
-                            bottom: 5
-                        }}
                         >
                         <Tooltip />
                         <Legend layout='vertical' verticalAlign='middle' align='right' iconType='circle'/>
