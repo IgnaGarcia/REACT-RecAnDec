@@ -13,6 +13,7 @@ export const Shell = () => {
         saveUser({
             "name": "Igna Garcia",
             "telegramId": "982840555",
+            "createDate": "2022-09-12T02:32:45.919+00:00",
             "_id": process.env.REACT_APP_USER_ID
         }, token)
     }
