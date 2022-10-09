@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import { UserContext } from '../contexts/UserContext';
 import { useFetch } from '../hooks/useFetch';
+import { useSelect } from '../hooks/useSelect';
 import { getSummary } from '../api/RecordService';
 import { getColor, renderCustomizedLabel } from '../utils/utils';
 import Select from 'react-select'
@@ -9,8 +10,7 @@ import { useState } from 'react';
 
 export const PiePlot = ({ title, groupBy, filterList }) => {
     const { user } = useContext(UserContext)
-    const [selected, setSelected] = useState(filterList)
-    const [options, setOptions] = useState(getSummary(user, groupBy, selected))
+    const { selected, options, onSelectChange } = useSelect(filterList, getSummary, user, groupBy)
     const { body, loading } = useFetch(options)
     let data = null
     let names = []
@@ -23,11 +23,6 @@ export const PiePlot = ({ title, groupBy, filterList }) => {
         })
     }
 
-    const handleChange = (items) => {
-        setSelected(items)
-        setOptions(getSummary(user, groupBy, items))
-    }
-
     return (
         <>
         {
@@ -38,7 +33,7 @@ export const PiePlot = ({ title, groupBy, filterList }) => {
                         <h2 className='flex-1 text-xl'> {title} </h2>
                         {filterList? 
                                 <Select className="flex-1" options={filterList} value={selected} isMulti isSearchable 
-                                    onChange={handleChange} hideSelectedOptions={false} />
+                                    onChange={onSelectChange} hideSelectedOptions={false} />
                         : ""}
                     </div>
                     <PieChart
