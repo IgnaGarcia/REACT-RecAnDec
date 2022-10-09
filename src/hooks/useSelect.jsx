@@ -18,10 +18,10 @@ export const useSelect = (filterList = [], cb, ...props) => {
     }, [selected, period])
   
     return {
-        selected,
-        period, 
+        selected, 
         options,
         onSelectChange,
+        period,
         onPeriodChange
     }
 }
