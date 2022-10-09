@@ -1,8 +1,8 @@
 import React, { useState, createContext } from 'react'
 
-export const UserConfigContext = createContext();
+export const ConfigContext = createContext();
 
-const UserConfigProvider = ({ children }) => {
+const ConfigProvider = ({ children }) => {
     const [ categories, setCategories ] = useState(() => { 
         const storaged = window.localStorage.getItem("categories")
         return { data: JSON.parse(storaged), loading: !storaged }
@@ -34,10 +34,10 @@ const UserConfigProvider = ({ children }) => {
     const contx = { categories, tags, wallets, saveCategories, saveTags, saveWallets }
 
     return (
-        <UserConfigContext.Provider value={ contx } >
+        <ConfigContext.Provider value={ contx } >
             { children }
-        </UserConfigContext.Provider>
+        </ConfigContext.Provider>
     )
 }
 
-export default UserConfigProvider
+export default ConfigProvider

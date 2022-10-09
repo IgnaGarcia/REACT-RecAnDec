@@ -9,12 +9,12 @@ import { useFetch } from '../../hooks/useFetch'
 import { getCategories } from '../../api/CategoriesService'
 import { getTags } from '../../api/TagsService'
 import { getWallets } from '../../api/WalletService'
-import { UserConfigContext } from '../../contexts/UserConfigContext'
+import { ConfigContext } from '../../contexts/ConfigContext'
 import { UserContext } from '../../contexts/UserContext'
 
 export const LogedShell = () => {
     const { user } = useContext(UserContext)
-    const { categories, tags, wallets, saveCategories, saveTags, saveWallets } = useContext(UserConfigContext)
+    const { categories, tags, wallets, saveCategories, saveTags, saveWallets } = useContext(ConfigContext)
     const categoryResponse = useFetch(getCategories(user))
     const tagResponse = useFetch(getTags(user))
     const walletResponse = useFetch(getWallets(user))

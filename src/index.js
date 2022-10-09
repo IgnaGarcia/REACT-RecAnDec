@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { Shell } from './pages/Shell/Shell';
 import UserProvider from './contexts/UserContext';
-import UserConfigProvider from './contexts/UserConfigContext'
+import ConfigProvider from './contexts/ConfigContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <UserProvider>
-      <UserConfigProvider>
+      <ConfigProvider>
         <Shell/>
-      </UserConfigProvider>
+      </ConfigProvider>
     </UserProvider>
 );

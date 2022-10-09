@@ -4,11 +4,11 @@ import { useLazyFetch } from '../../hooks/useLazyFetch'
 import { useForm } from '../../hooks/useForm'
 import { UserContext } from '../../contexts/UserContext'
 import { postRecord } from '../../api/RecordService'
-import { UserConfigContext } from '../../contexts/UserConfigContext'
+import { ConfigContext } from '../../contexts/ConfigContext'
 
 export const Footer = () => {
     const { user } = useContext(UserContext)
-    const { categories, tags, wallets } = useContext(UserConfigContext)
+    const { categories, tags, wallets } = useContext(ConfigContext)
     const recordResponse = useLazyFetch()
 
     const { formState, onInputChange, reset } = useForm({

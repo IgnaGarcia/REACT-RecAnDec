@@ -56,7 +56,7 @@ export const getSummary = (user, by, filter) => {
         if (len !== 0) {
             filterStr = filterStr + "&"
             filter.forEach((el, idx) => {
-                filterStr = (idx +1 === len) ? filterStr + `filter=${el}` : filterStr + `filter=${el}&`
+                filterStr = (idx +1 === len) ? filterStr + `filter=${el.value}` : filterStr + `filter=${el.value}&`
             })
         }
     }
