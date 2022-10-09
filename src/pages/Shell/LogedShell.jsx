@@ -36,6 +36,7 @@ export const LogedShell = () => {
                         <Route exact strict path='categorias' element={ <div>cat</div> }/>
                         <Route exact strict path='etiquetas' element={ <div>tag</div> }/>
                         <Route exact strict path='billeteras' element={ <div>wall</div> }/>
+                        <Route exact strict path='limites' element={ <div>limites</div> }/>
                         <Route exact strict path='telegram' element={ <div>tg</div> }/>
                     </Route>
                 </Routes>
