@@ -7,17 +7,15 @@ export const invalidToken = (user) => {
     return (decoded.exp * 1000 < Date.now())
 }
 
-export const getEndOfMonth = () => {
-    let today = new Date()
-    let endOfMonth = new Date(today.getFullYear(), today.getMonth()+1, 0)
+export const getEndOfMonth = (period= new Date()) => {
+    let endOfMonth = new Date(period.getFullYear(), period.getMonth()+1, 0)
     return endOfMonth.toISOString().split('T')[0]
 }
 
-export const getFisrtOfMonth = () => {
-    let today = new Date()
-    let firstOfMonth = today.getMonth() === 0? 
-        `${today.getFullYear()-1}-12-01`
-        : `${today.getFullYear()}-${today.getMonth()+1}-01`
+export const getFisrtOfMonth = (period= new Date()) => {
+    let firstOfMonth = period.getMonth() === 0? 
+        `${period.getFullYear()-1}-12-01`
+        : `${period.getFullYear()}-${period.getMonth()+1}-01`
     return firstOfMonth
 }
 

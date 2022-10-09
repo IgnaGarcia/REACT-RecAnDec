@@ -4,10 +4,13 @@ import { UserContext } from '../contexts/UserContext';
 import { useFetch } from '../hooks/useFetch';
 import { getHistorical } from '../api/RecordService';
 import { getColor } from '../utils/utils';
+import Select from 'react-select'
+import { useSelect } from '../hooks/useSelect';
 
 export const LinesPlot = ({ title, groupBy, filterList }) => {
     const { user } = useContext(UserContext)
-    const { body, loading } = useFetch(getHistorical(user, groupBy))
+    const { selected, options, onSelectChange } = useSelect(filterList, getHistorical, user, groupBy)
+    const { body, loading } = useFetch(options)
     let data = null
     let names = []
 
@@ -45,7 +48,13 @@ export const LinesPlot = ({ title, groupBy, filterList }) => {
             loading? "Cargando..." : 
                 <div className='card'>
                     { mapHistorical() }
-                    <h2 className='text-xl mb-6'> {title} </h2>
+                    <div className='flex justify-between w-full mb-6'>
+                        <h2 className='flex-1 text-xl'> {title} </h2>
+                        {filterList? 
+                                <Select className="flex-1" options={filterList} value={selected} isMulti isSearchable 
+                                    onChange={onSelectChange} hideSelectedOptions={false} />
+                        : ""}
+                    </div>
                     <LineChart
                         width={500}
                         height={300}

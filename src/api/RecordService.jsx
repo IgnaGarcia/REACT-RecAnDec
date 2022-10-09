@@ -33,7 +33,7 @@ export const getHistorical = (user, by, filter) => {
         if (len !== 0) {
             filterStr = filterStr + "?"
             filter.forEach((el, idx) => {
-                filterStr = (idx +1 === len) ? filterStr + `filter=${el}` : filterStr + `filter=${el}&`
+                filterStr = (idx +1 === len) ? filterStr + `filter=${el.value}` : filterStr + `filter=${el.value}&`
             })
         }
     }
@@ -49,18 +49,18 @@ export const getHistorical = (user, by, filter) => {
     return { url, options }
 }
 
-export const getSummary = (user, by, filter) => {
+export const getSummary = (user, by, filter, period) => {
     let filterStr = ""
     if (filter) {
         let len = filter.length
         if (len !== 0) {
             filterStr = filterStr + "&"
             filter.forEach((el, idx) => {
-                filterStr = (idx +1 === len) ? filterStr + `filter=${el}` : filterStr + `filter=${el}&`
+                filterStr = (idx +1 === len) ? filterStr + `filter=${el.value}` : filterStr + `filter=${el.value}&`
             })
         }
     }
-    let dateFilter = `dateFrom=${getFisrtOfPreviusMonth()}&dateUntil=${getEndOfMonth()}`
+    let dateFilter = `dateFrom=${getFisrtOfMonth(period)}&dateUntil=${getEndOfMonth(period)}`
     let url = `${BASE_URL}/records/summary/${by}?${dateFilter}${filterStr}`
     let options = {
         method: 'GET',
