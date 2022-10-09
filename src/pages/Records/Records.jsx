@@ -1,13 +1,13 @@
 import React from 'react'
 import { Outlet } from "react-router-dom"
-import { NavItem } from "../../components/NavItem"
+import { TabItem } from '../../components/TabItem'
 
 export const Records = () => {
   return (
     <>
-        <ul className='py-2 space-y-2'>
-            <NavItem to="/registros/egresos" title="Egresos" />
-            <NavItem to="/registros/ingresos" title="Ingresos" />
+        <ul className='tab'>
+            <TabItem to="/registros/egresos" title="Egresos"/>
+            <TabItem to="/registros/ingresos" title="Ingresos"/>
         </ul>
 
         <div>
