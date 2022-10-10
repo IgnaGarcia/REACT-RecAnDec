@@ -31,4 +31,16 @@
     .input {
         @apply py-1 px-2 text-back-900 bg-back-100 rounded-md
     }
+    .table-card {
+        @apply text-back-700 bg-back-100 rounded-lg text-sm text-center 
+    }
+    .page-dot {
+        @apply rounded-full bg-back-200 py-1 px-3
+    }
+    .page-dot-active {
+        @apply bg-back-700 text-back-200
+    }
+    .page-dot-disabled {
+        @apply bg-back-50
+    }
   }

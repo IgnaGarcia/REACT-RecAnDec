@@ -14,6 +14,18 @@ export const postRecord = (user, req) => {
     return { url, options }
 }
 
+export const getRecords = (user, page, isOut) => {
+    let url = `${BASE_URL}/records?page=${page}&isOut=${isOut}`
+    let options = {
+        method: 'GET',
+        headers: {
+            "x-access-token": user.token,
+            "Content-Type": "application/json"
+        }
+    }
+    return { url, options }
+}
+
 export const getBalance = (user) => {
     let url = `${BASE_URL}/records/balance?dateFrom=${getFisrtOfPreviusMonth()}&dateUntil=${getEndOfMonth()}`
     let options = {
