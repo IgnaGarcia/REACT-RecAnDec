@@ -30,8 +30,8 @@ export const LogedShell = () => {
                 <Routes>
                     <Route exact strict path='' element={ <Home /> }/>
                     <Route exact strict path='registros' element={ <Records /> }>
-                        <Route exact strict path='egresos' element={ <RecordsList isOut /> }/>
-                        <Route exact strict path='ingresos' element={ <RecordsList /> }/>
+                        <Route exact strict path='egresos' element={ <RecordsList isOut pageN={1}/> }/>
+                        <Route exact strict path='ingresos' element={ <RecordsList pageN={1}/> }/>
                     </Route>
                     <Route exact strict path='configuracion' element={ <Configuration /> }>
                         <Route exact strict path='categorias' element={ <div>cat</div> }/>
