@@ -7,7 +7,6 @@ import { RecordRow } from './RecordRow'
 
 export const RecordsList = ({ isOut, pageN=1 }) => {
   const { user } = useContext(UserContext)
-  console.log(pageN)
   const [page, setPage] = useState(pageN)
   const { body, loading } = useFetch(getRecords(user, page, isOut))
 

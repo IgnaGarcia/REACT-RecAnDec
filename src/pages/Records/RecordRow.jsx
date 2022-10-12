@@ -1,8 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { ConfigContext } from '../../contexts/ConfigContext'
 import { Chip } from '../../components/Chip'
+import { EditRecordModal } from './EditRecordModal'
 
 export const RecordRow = ({ record }) => {
+  const [modalOpen, setModalOpen] = useState(false)
   const { categories, tags, wallets, getCategorie, getTag, getWallet } = useContext(ConfigContext)
 
   const getDate = (dateStr) => {
@@ -65,7 +67,11 @@ export const RecordRow = ({ record }) => {
             </div>
         </td>
 
-        <td className='border-l'>Editar</td>
+        <td className='border-l'>
+            <button onClick={() => setModalOpen(true)}> Editar </button>
+        </td>
+
+        { modalOpen? <EditRecordModal record={record} toggleOpen={setModalOpen} /> : "" }
     </tr>        
   )
 }
