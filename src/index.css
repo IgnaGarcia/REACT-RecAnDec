@@ -10,4 +10,16 @@
     .nav-sublink {
         @apply flex items-center p-2 pl-6 rounded-lg text-back-100 hover:bg-back-700
     }
+    .btn {
+        @apply py-2 px-4 text-back-100 bg-back-700 hover:bg-back-800 rounded-lg hover:cursor-pointer
+    }
+    .btn-disabled {
+        @apply py-2 px-4 text-back-100 bg-back-400 rounded-lg
+    }
+    .card {
+        @apply py-6 px-8 text-back-700 bg-back-100 rounded-lg max-w-prose
+    }
+    .input {
+        @apply py-1 px-2 text-back-900 bg-back-100 rounded-md
+    }
   }
