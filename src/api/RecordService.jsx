@@ -14,6 +14,19 @@ export const postRecord = (user, req) => {
     return { url, options }
 }
 
+export const putRecord = (user, req) => {
+    let url = `${BASE_URL}/records/${req._id}`
+    let options = {
+        method: 'PUT',
+        headers: {
+            "x-access-token": user.token,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(req)
+    }
+    return { url, options }
+}
+
 export const getRecords = (user, page, isOut) => {
     let url = `${BASE_URL}/records?page=${page}&isOut=${isOut}`
     let options = {

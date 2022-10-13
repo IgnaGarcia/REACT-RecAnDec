@@ -1,12 +1,16 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { ConfigContext } from '../../contexts/ConfigContext'
 import { UserContext } from '../../contexts/UserContext'
 import { Chip } from '../../components/Chip'
 import Select from 'react-select'
+import { useSimpleSelect } from '../../hooks/useSimpleSelect'
+import { useLazyFetch } from '../../hooks/useLazyFetch'
+import { putRecord } from '../../api/RecordService'
 
 export const EditRecordModal = ({ record, toggleOpen }) => {
   const { user } = useContext(UserContext)
   const { categories, tags, wallets, getCategorie, getTag, getWallet } = useContext(ConfigContext)
+  const recordResponse = useLazyFetch()
 
   const getDate = (dateStr) => {
     let date = new Date(dateStr)
@@ -20,7 +24,9 @@ export const EditRecordModal = ({ record, toggleOpen }) => {
 
   const getWalletSelected= (id) => {
     let index  = getWallet(id)
-    return index === -1 ? null : wallets.data[index] 
+    if (index === -1) return null
+    let selected = wallets.data[index]
+    return {value: selected._id, label: selected.label }
   }
 
   const getTagsSelected= (id) => {
@@ -28,7 +34,9 @@ export const EditRecordModal = ({ record, toggleOpen }) => {
     return id && id.length > 0 ?
             id.map(tagId => {
                 index = getTag(tagId) 
-                return index === -1 ? null : tags.data[index]
+                if (index === -1) return null
+                let selected = tags.data[index]
+                return {value: selected._id, label: selected.label }
             })
             : null
   }
@@ -42,14 +50,26 @@ export const EditRecordModal = ({ record, toggleOpen }) => {
   const categorie = getLabel(record.category)
   const tagList = getTagsSelected(record.tags)
   const wallet = getWalletSelected(record.wallet)
+  
+  const tagSelect = useSimpleSelect(tagList)
+  const walletSelect = useSimpleSelect(wallet)
 
   const saveRecord = () => {
-    toggleOpen(false)
+    record.wallet = walletSelect.selected ? walletSelect.selected.value : null
+    record.tags = (tagSelect.selected && tagSelect.selected.length) ? tagSelect.selected.map(el => el.value) : null
+    recordResponse.run(putRecord(user, record))
   }
 
-  const onSelectChange = (items) => {
-    console.log(items)
-  }
+  useEffect(() => {
+    if(!recordResponse.loading && (recordResponse.error || recordResponse.body)){
+        if (recordResponse.error) {
+            alert("Error al Enviar");
+        } else if (recordResponse.body) {
+            alert("Resgistro Actualizado!");
+            toggleOpen(false)
+        }
+    }
+}, [recordResponse.loading])
 
   return (
     <div className="fixed overflow-x-hidden overflow-y-hidden top-0 left-0 right-0 z-50 
@@ -66,13 +86,13 @@ export const EditRecordModal = ({ record, toggleOpen }) => {
 
             <div className='flex justify-center items-center content-center flex-wrap mb-3'>
                 Etiquetas: 
-                <Select options={arrToInput(tags)} value={tagList? tagList : null} isMulti isSearchable 
-                    onChange={onSelectChange} hideSelectedOptions={false} />
+                <Select options={arrToInput(tags)} value={tagSelect.selected} isMulti isSearchable 
+                    onChange={tagSelect.onSelectChange} hideSelectedOptions={false} />
             </div>
             <div className='flex justify-center items-center content-center flex-wrap mb-3'>
                 Billeteras: 
-                <Select options={arrToInput(wallets)} value={wallet? wallet : null} isSearchable 
-                    onChange={onSelectChange} hideSelectedOptions={false} />
+                <Select options={arrToInput(wallets)} value={walletSelect.selected} isSearchable 
+                    onChange={walletSelect.onSelectChange} hideSelectedOptions={false} />
             </div>
 
             <div className='flex w-full justify-evenly'>

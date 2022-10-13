@@ -35,7 +35,7 @@ export const RecordRow = ({ record }) => {
   const categorie = getLabel(0, record.category)
   const tagList = getLabel(1, record.tags)
   const wallet = getLabel(2, record.wallet)
-
+  
   return (
     <tr className='h-7'>
         <td>{getDate(record.date)}</td>
@@ -52,8 +52,8 @@ export const RecordRow = ({ record }) => {
         <td className='border-l h-full'> 
             <div className='flex justify-center items-center content-center flex-wrap'>
                 { tagList? 
-                    tagList.map(el => 
-                        <Chip index={el.index} label={el.label} key={`tag-chip-${el.index}-${el.label}`}/>
+                    tagList.map(el => el?
+                        <Chip index={el.index} label={el.label} key={`tag-chip-${el.index}-${el.label}`}/> : ""
                     ) 
                 : "" }
             </div>
