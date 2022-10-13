@@ -25,13 +25,13 @@ export const Home = () => {
             <Balance />
             <LinesPlot title="Historial de Ingresos y Egresos" groupBy="isOut" 
                 filterList={null} />
-
+            
             <h2 className='title mt-6'> Categorias </h2>
             <PiePlot title="Gastos por Categoria" groupBy="category" 
                 filterList={categoriesList} />
             <LinesPlot title="Historial por Categorias" groupBy="category" 
                 filterList={categoriesList} />
-
+            
             <h2 className='title mt-6'> Etiquetas </h2>
             <PiePlot title="Gastos por Etiqueta" groupBy="tags" 
                 filterList={tagsList} />

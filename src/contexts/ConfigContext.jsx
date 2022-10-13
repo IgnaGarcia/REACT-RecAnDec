@@ -1,4 +1,4 @@
-import React, { useState, createContext, useMemo } from 'react'
+import React, { useState, createContext } from 'react'
 
 export const ConfigContext = createContext();
 
@@ -34,8 +34,6 @@ const ConfigProvider = ({ children }) => {
         setWallets({ data: walletList, loading: false })
         window.localStorage.setItem("wallets", JSON.stringify(walletList))
     }
-
-    const getWallet = (id) => wallets.data.findIndex(el => el._id === id)
 
     const contx = { categories, tags, wallets, saveCategories, saveTags, saveWallets, getCategorie, getTag, getWallet }
 
