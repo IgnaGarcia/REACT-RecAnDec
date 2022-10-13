@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react'
+import React, { useState, createContext, useMemo } from 'react'
 
 export const ConfigContext = createContext();
 
@@ -21,17 +21,23 @@ const ConfigProvider = ({ children }) => {
         window.localStorage.setItem("categories", JSON.stringify(catList))
     }
 
+    const getCategorie = (id) => categories.data.findIndex(el => el._id === id)
+
     const saveTags = (tagList) => {
         setTags({ data: tagList, loading: false })
         window.localStorage.setItem("tags", JSON.stringify(tagList))
     }
+
+    const getTag = (id) => tags.data.findIndex(el => el._id === id)
 
     const saveWallets = (walletList) => {
         setWallets({ data: walletList, loading: false })
         window.localStorage.setItem("wallets", JSON.stringify(walletList))
     }
 
-    const contx = { categories, tags, wallets, saveCategories, saveTags, saveWallets }
+    const getWallet = (id) => wallets.data.findIndex(el => el._id === id)
+
+    const contx = { categories, tags, wallets, saveCategories, saveTags, saveWallets, getCategorie, getTag, getWallet }
 
     return (
         <ConfigContext.Provider value={ contx } >

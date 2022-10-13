@@ -19,7 +19,34 @@
     .card {
         @apply py-6 px-8 text-back-700 bg-back-100 rounded-lg max-w-prose
     }
+    .tab {
+        @apply flex justify-end items-center bg-back-100
+    }
+    .tab-link {
+        @apply text-back-700 h-16 flex items-center
+    }
+    .tab-link a {
+        @apply px-6 py-5 hover:bg-back-300
+    }
     .input {
         @apply py-1 px-2 text-back-900 bg-back-100 rounded-md
+    }
+    .table-card {
+        @apply text-back-700 bg-back-100 rounded-xl text-sm text-center 
+    }
+    .page-dot {
+        @apply rounded-full bg-back-200 py-1 px-3
+    }
+    .page-dot-active {
+        @apply bg-back-700 text-back-200
+    }
+    .page-dot-disabled {
+        @apply bg-back-50
+    }
+    .chip {
+        @apply px-2 w-min rounded-xl border text-xs
+    }
+    .title {
+        @apply text-3xl col-span-2 px-6
     }
   }

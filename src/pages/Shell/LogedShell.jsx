@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { Route, Routes } from "react-router-dom"
 import { Configuration } from '../Configuration/Configuration'
 import { Records } from '../Records/Records'
+import { RecordsList } from '../Records/RecordsList'
 import { Sidebar } from './Sidebar'
 import { Footer } from './Footer'
 import { Home } from '../Home/Home'
@@ -29,8 +30,8 @@ export const LogedShell = () => {
                 <Routes>
                     <Route exact strict path='' element={ <Home /> }/>
                     <Route exact strict path='registros' element={ <Records /> }>
-                        <Route exact strict path='egresos' element={ <div>ingresos</div> }/>
-                        <Route exact strict path='ingresos' element={ <div>egresos</div> }/>
+                        <Route exact strict path='egresos' element={ <RecordsList isOut pageN={1}/> }/>
+                        <Route exact strict path='ingresos' element={ <RecordsList pageN={1}/> }/>
                     </Route>
                     <Route exact strict path='configuracion' element={ <Configuration /> }>
                         <Route exact strict path='categorias' element={ <div>cat</div> }/>
