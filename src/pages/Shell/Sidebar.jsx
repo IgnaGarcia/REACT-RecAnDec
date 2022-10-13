@@ -30,6 +30,7 @@ export const Sidebar = () => {
                             <NavItem to="/configuracion/categorias" title="Categorias" type="nav-sublink"/>
                             <NavItem to="/configuracion/etiquetas" title="Etiquetas" type="nav-sublink"/>
                             <NavItem to="/configuracion/billeteras" title="Billeteras" type="nav-sublink"/>
+                            <NavItem to="/configuracion/limites" title="Limites" type="nav-sublink"/>
                             <NavItem to="/configuracion/telegram" title="Telegram" type="nav-sublink"/>
                         </ul>
                     </li>

@@ -3,7 +3,7 @@ import React from 'react'
 export const PeriodCarousel = ({ period, onPeriodChange, minPeriod }) => {
     const maxPeriod = new Date()
     const minDatePeriod = new Date(minPeriod)
-    console.log(maxPeriod, minDatePeriod)
+
     const validPeriod = (other) => !((period.getMonth() === other.getMonth()) 
         && (period.getFullYear() === other.getFullYear()))
     

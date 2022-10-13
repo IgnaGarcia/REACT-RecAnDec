@@ -9,6 +9,7 @@ export const Configuration = () => {
             <NavItem to="/configuracion/categorias" title="Categorias" />
             <NavItem to="/configuracion/etiquetas" title="Etiquetas" />
             <NavItem to="/configuracion/billeteras" title="Billeteras" />
+            <NavItem to="/configuracion/limites" title="Limites" />
             <NavItem to="/configuracion/telegram" title="Telegram" />
         </ul>
 

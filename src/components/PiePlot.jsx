@@ -27,7 +27,7 @@ export const PiePlot = ({ title, groupBy, filterList }) => {
         <>
         {
             loading? "Cargando..." : 
-                <div className='card'>
+                <div className='card flex flex-col'>
                     {mapSummary()}
                     <div className='flex justify-between w-full mb-6'>
                         <h2 className='flex-1 text-xl'> {title} </h2>
@@ -36,27 +36,29 @@ export const PiePlot = ({ title, groupBy, filterList }) => {
                                     onChange={onSelectChange} hideSelectedOptions={false} />
                         : ""}
                     </div>
-                    <PieChart
-                        width={500}
-                        height={300}
-                        >
-                        <Tooltip />
-                        <Legend layout='vertical' verticalAlign='middle' align='right' iconType='circle'/>
-                        <Pie
-                            dataKey="value"
-                            startAngle={360}
-                            endAngle={0}
-                            data={data}
-                            cx="50%"
-                            cy="50%"
-                            labelLine={false}
-                            label={renderCustomizedLabel}
-                        >
-                            {data.map((_, idx) => (
-                                <Cell key={`pie-cell-${idx}`} fill={getColor(idx)} />
-                            ))}
-                        </Pie>
-                    </PieChart>
+                    { data.length === 0? <div className="text-lg flex-1 flex justify-center items-center">No hay datos en esta seleccion</div> :
+                        <PieChart
+                            width={500}
+                            height={300}
+                            >
+                            <Tooltip />
+                            <Legend layout='vertical' verticalAlign='middle' align='right' iconType='circle'/>
+                            <Pie
+                                dataKey="value"
+                                startAngle={360}
+                                endAngle={0}
+                                data={data}
+                                cx="50%"
+                                cy="50%"
+                                labelLine={false}
+                                label={renderCustomizedLabel}
+                            >
+                                {data.map((_, idx) => (
+                                    <Cell key={`pie-cell-${idx}`} fill={getColor(idx)} />
+                                ))}
+                            </Pie>
+                        </PieChart>
+                    }
                     <PeriodCarousel period={period} onPeriodChange={onPeriodChange} minPeriod={user.createDate}/>
                 </div>
         }
