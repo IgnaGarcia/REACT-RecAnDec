@@ -5,11 +5,15 @@ import { useForm } from '../../hooks/useForm'
 import { UserContext } from '../../contexts/UserContext'
 import { postRecord } from '../../api/RecordService'
 import { ConfigContext } from '../../contexts/ConfigContext'
+import { useState } from 'react'
 
 export const Footer = () => {
     const { user } = useContext(UserContext)
     const { categories, tags, wallets } = useContext(ConfigContext)
     const recordResponse = useLazyFetch()
+    let categoriesOut = []
+    let categoriesIn = []
+    const [categoriesToShow, setCategoriesToShow] = useState([])
 
     const { formState, onInputChange, reset } = useForm({
         isIn: false,
@@ -45,6 +49,15 @@ export const Footer = () => {
         }
     }, [recordResponse.loading])
 
+    useEffect(() => {
+        formState.isIn? setCategoriesToShow(categoriesIn) : setCategoriesToShow(categoriesOut)
+    }, [formState.isIn])
+
+    const setCategories = () => {
+        categoriesOut = categories.data.filter(el => el.isOut)
+        categoriesIn = categories.data.filter(el => !el.isOut)
+    }
+
     return (
         <footer className="flex items-center fixed w-screen bottom-0 h-16">
             <div className="w-60 bg-back-800 text-back-100 py-4 px-5">
@@ -63,16 +76,18 @@ export const Footer = () => {
 
                     { categories.loading?
                         <span>Cargando...</span>
-                        : 
-                        <select name="category" id="categorySelector"  required
-                            value={formState.category} onChange={onInputChange}>
-                            <option value="" disabled> -- Categoria -- </option>
-                            {
-                                categories.data.map(el => 
-                                    <option value={el._id} key={el._id}> {el.label} </option> 
-                                )
-                            }
-                        </select>
+                        : <>
+                            {setCategories()}
+                            <select name="category" id="categorySelector"  required
+                                value={formState.category} onChange={onInputChange}>
+                                <option value="" disabled> -- Categoria -- </option>
+                                {
+                                    categoriesToShow.map(el => 
+                                        <option value={el._id} key={el._id}> {el.label} </option> 
+                                    )
+                                }
+                            </select>
+                        </>
                     }
                     
                     { tags.loading?

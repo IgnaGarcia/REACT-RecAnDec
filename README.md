@@ -19,29 +19,6 @@ npm install react-router react-router-dom
 
 
 ## TO-DO List
-- Interfaz Conetendora
-    - Form de Registrar Ingreso/Egreso
-- Login/Signin
-    - Pagina 
-    - Form Login(Basico)
-    - UserContext
-    - User en Local Storage
-- Resumen y Analisis(HOME)
-    - Cards
-    - Card de Balance
-    - Card de Lineas
-    - Card de Torta
-    - Card de Barra
-    - Inputs de Periodo
-    - Consumo de GETs Categorias, Tags, Wallets
-    - Inputs Seleccionables
-    - Consumo de Resumenes
-- Listado de Ingresos Egresos
-    - Tabs Component
-    - Table Component
-    - Get Records
-    - Update Record
-    - Get con Filtro de Categorias, Wallets y Tags
 - Configuracion Inicial
     - Tabs Component(Reusar)
     - Etiquetas
