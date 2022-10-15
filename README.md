@@ -20,10 +20,7 @@ npm install react-router react-router-dom
 
 ## TO-DO List
 - Configuracion Inicial
-    - Tabs Component(Reusar)
     - Etiquetas
-        - Tabla de Etiquetas
-        - Get de Etiquetas
         - Form de Etiqueta
         - Post de Etiqueta
      - Limites

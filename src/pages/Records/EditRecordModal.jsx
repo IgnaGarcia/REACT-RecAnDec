@@ -6,6 +6,7 @@ import Select from 'react-select'
 import { useSimpleSelect } from '../../hooks/useSimpleSelect'
 import { useLazyFetch } from '../../hooks/useLazyFetch'
 import { putRecord } from '../../api/RecordService'
+import { Modal } from '../../components/Modal'
 
 export const EditRecordModal = ({ record, toggleOpen }) => {
   const { user } = useContext(UserContext)
@@ -72,34 +73,26 @@ export const EditRecordModal = ({ record, toggleOpen }) => {
 }, [recordResponse.loading])
 
   return (
-    <div className="fixed overflow-x-hidden overflow-y-hidden top-0 left-0 right-0 z-50 
-        w-full h-full bg-back-900/50 flex justify-center items-center">
-        <div className='card flex-1 py-10'>
-            <h2 className='title mb-3'> Editar Registro </h2>
-            <div className='mb-3'> Fecha: {getDate(record.date)} </div>
-            <div className='mb-3'> Monto: ${ record.amount } </div>
-            <div className='flex justify-center items-center content-center flex-wrap mb-3'>
-                Categoria: { categorie? 
-                    <Chip index={categorie.index} label={categorie.label} /> 
-                : "" }
-            </div>
-
-            <div className='flex justify-center items-center content-center flex-wrap mb-3'>
-                Etiquetas: 
-                <Select options={arrToInput(tags)} value={tagSelect.selected} isMulti isSearchable 
-                    onChange={tagSelect.onSelectChange} hideSelectedOptions={false} />
-            </div>
-            <div className='flex justify-center items-center content-center flex-wrap mb-3'>
-                Billeteras: 
-                <Select options={arrToInput(wallets)} value={walletSelect.selected} isSearchable 
-                    onChange={walletSelect.onSelectChange} hideSelectedOptions={false} />
-            </div>
-
-            <div className='flex w-full justify-evenly'>
-                <button className="btn" onClick={saveRecord}> Guardar </button>
-                <button className="btn bg-red-500" onClick={() => toggleOpen(false)}> Cancelar </button>
-            </div>
+    <Modal onPost={saveRecord} toggleOpen={toggleOpen}>
+        <h2 className='title mb-3'> Editar Registro </h2>
+        <div className='mb-3'> Fecha: {getDate(record.date)} </div>
+        <div className='mb-3'> Monto: ${ record.amount } </div>
+        <div className='flex justify-center items-center content-center flex-wrap mb-3'>
+            Categoria: { categorie? 
+                <Chip index={categorie.index} label={categorie.label} /> 
+            : "" }
         </div>
-    </div>       
+
+        <div className='flex justify-center items-center content-center flex-wrap mb-3'>
+            Etiquetas: 
+            <Select options={arrToInput(tags)} value={tagSelect.selected} isMulti isSearchable 
+                onChange={tagSelect.onSelectChange} hideSelectedOptions={false} />
+        </div>
+        <div className='flex justify-center items-center content-center flex-wrap mb-3'>
+            Billeteras: 
+            <Select options={arrToInput(wallets)} value={walletSelect.selected} isSearchable 
+                onChange={walletSelect.onSelectChange} hideSelectedOptions={false} />
+        </div>
+    </Modal>       
   )
 }
