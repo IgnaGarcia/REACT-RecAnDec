@@ -1,97 +1,59 @@
-import React, { useContext, useEffect } from 'react'
-import { ConfigContext } from '../../contexts/ConfigContext'
-import { UserContext } from '../../contexts/UserContext'
-import { Chip } from '../../components/Chip'
-import Select from 'react-select'
-import { useSimpleSelect } from '../../hooks/useSimpleSelect'
-import { useLazyFetch } from '../../hooks/useLazyFetch'
-import { putRecord } from '../../api/RecordService'
-import { Modal } from '../../components/Modal'
+import React, { useContext, useEffect, useState } from 'react'
+import { UserContext } from '../../../contexts/UserContext'
+import { ConfigContext } from '../../../contexts/ConfigContext'
+import { useLazyFetch } from '../../../hooks/useLazyFetch'
+import { Modal } from '../../../components/Modal'
+import { postTag } from '../../../api/TagsService'
+import { useForm } from '../../../hooks/useForm'
 
-export const EditRecordModal = ({ record, toggleOpen }) => {
+export const CreateTagModal = ({ toggleOpen, isNew }) => {
   const { user } = useContext(UserContext)
-  const { categories, tags, wallets, getCategorie, getTag, getWallet } = useContext(ConfigContext)
-  const recordResponse = useLazyFetch()
+  const { tags, saveTags } = useContext(ConfigContext)
+  const { formState, onInputChange } = useForm({
+    label: "",
+    alias: ""
+  })
+  const [formError, setError] = useState(null)
+  const tagResponse = useLazyFetch()
 
-  const getDate = (dateStr) => {
-    let date = new Date(dateStr)
-    return `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`
-  }
-
-  const getLabel= (id) => {
-    let index  = getCategorie(id)
-    return index === -1 ? null : { index: index, label: categories.data[index].label } 
-  }
-
-  const getWalletSelected= (id) => {
-    let index  = getWallet(id)
-    if (index === -1) return null
-    let selected = wallets.data[index]
-    return {value: selected._id, label: selected.label }
-  }
-
-  const getTagsSelected= (id) => {
-    let index = null
-    return id && id.length > 0 ?
-            id.map(tagId => {
-                index = getTag(tagId) 
-                if (index === -1) return null
-                let selected = tags.data[index]
-                return {value: selected._id, label: selected.label }
-            })
-            : null
-  }
-
-  const arrToInput = (arr) => {
-    return arr.data.map(el => {
-        return {value: el._id, label: el.label}
-    })
-  }
-
-  const categorie = getLabel(record.category)
-  const tagList = getTagsSelected(record.tags)
-  const wallet = getWalletSelected(record.wallet)
-  
-  const tagSelect = useSimpleSelect(tagList)
-  const walletSelect = useSimpleSelect(wallet)
-
-  const saveRecord = () => {
-    record.wallet = walletSelect.selected ? walletSelect.selected.value : null
-    record.tags = (tagSelect.selected && tagSelect.selected.length) ? tagSelect.selected.map(el => el.value) : null
-    recordResponse.run(putRecord(user, record))
+  const saveTag = () => {
+    tagResponse.run(postTag(user, formState))
   }
 
   useEffect(() => {
-    if(!recordResponse.loading && (recordResponse.error || recordResponse.body)){
-        if (recordResponse.error) {
+    if(!tagResponse.loading && (tagResponse.error || tagResponse.body)){
+        if (tagResponse.error) {
             alert("Error al Enviar");
-        } else if (recordResponse.body) {
-            alert("Resgistro Actualizado!");
+        } else if (tagResponse.body.code === 11000) {
+            setError("Nombre o Alias ya existente entre tus etiquetas")
+        } else {
+            alert("Etiqueta Creada!");
+            tags.data.push(tagResponse.body)
+            saveTags(tags.data)
+            isNew(true)
             toggleOpen(false)
         }
     }
-}, [recordResponse.loading])
+}, [tagResponse.loading])
 
   return (
-    <Modal onPost={saveRecord} toggleOpen={toggleOpen}>
-        <h2 className='title mb-3'> Editar Registro </h2>
-        <div className='mb-3'> Fecha: {getDate(record.date)} </div>
-        <div className='mb-3'> Monto: ${ record.amount } </div>
-        <div className='flex justify-center items-center content-center flex-wrap mb-3'>
-            Categoria: { categorie? 
-                <Chip index={categorie.index} label={categorie.label} /> 
-            : "" }
-        </div>
-
-        <div className='flex justify-center items-center content-center flex-wrap mb-3'>
-            Etiquetas: 
-            <Select options={arrToInput(tags)} value={tagSelect.selected} isMulti isSearchable 
-                onChange={tagSelect.onSelectChange} hideSelectedOptions={false} />
-        </div>
-        <div className='flex justify-center items-center content-center flex-wrap mb-3'>
-            Billeteras: 
-            <Select options={arrToInput(wallets)} value={walletSelect.selected} isSearchable 
-                onChange={walletSelect.onSelectChange} hideSelectedOptions={false} />
+    <Modal onPost={saveTag} toggleOpen={toggleOpen}>
+        <h2 className='title mb-8'> Crear Etiqueta </h2>
+        
+        <div className='w-1/2 m-auto text-right'>
+            <div className='mb-3'>
+                <label htmlFor="label" className='mr-6'>Nombre:</label>
+                <input placeholder="Nombre" name="label" id="label" 
+                    value={formState.label} onChange={onInputChange}/>
+            </div>
+            <div className='mb-8'>
+                <label htmlFor="alias" className='mr-6'>Alias:</label>
+                <input placeholder="Alias" name="alias" id="alias" 
+                    value={formState.alias} onChange={onInputChange}/>
+                {formError? 
+                    <div className='mt-2 text-xs text-center text-red-600'> {formError} </div> 
+                : ""}
+            </div>
         </div>
     </Modal>       
   )

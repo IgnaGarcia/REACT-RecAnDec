@@ -8,7 +8,7 @@ export const useLazyFetch = () => {
 
     const [status, setStatus] = useState({
         data: null,
-        loading: false,
+        loading: true,
         error: null
     })
 
@@ -22,7 +22,6 @@ export const useLazyFetch = () => {
         try {
             const resp = await fetch(request.url, request.options)
             const data = await resp.json()
-            if(!resp.ok) throw Error(data.message)
 
             setStatus({
                 data,

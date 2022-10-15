@@ -2,24 +2,35 @@ import React, { useState, useContext } from 'react'
 import { UserContext } from '../../../contexts/UserContext'
 import { getTags } from '../../../api/TagsService'
 import { Chip } from '../../../components/Chip'
-import { useFetch } from '../../../hooks/useFetch'
+import { useLazyFetch } from '../../../hooks/useLazyFetch'
+import { CreateTagModal } from './CreateTagModal'
+import { useEffect } from 'react'
 
 export const Tags = () => {
   const { user } = useContext(UserContext)
-  const { body, loading } = useFetch(getTags(user))
+  const [modalOpen, setModalOpen] = useState(false)
+  const [newTag, setNewTag] = useState(true)
+  const { run, body, loading } = useLazyFetch()
 
   const getDate = (dateStr) => {
     let date = new Date(dateStr)
     return `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`
   }
 
+  useEffect(() => {
+    if(newTag) {
+      run(getTags(user))
+      setNewTag(false)
+    }
+  }, [newTag]) 
+
   return (
     <div className="flex flex-col w-10/12 mx-auto">
         <div className='flex justify-between items-center'>
           <h2 className='title my-6'> Etiquetas </h2>
-          <h2 className='btn text-sm'> Nueva Etiqueta </h2>
+          <button className='btn text-sm' onClick={() => setModalOpen(true)}> Nueva Etiqueta </button>
         </div>
-        
+        { modalOpen? <CreateTagModal toggleOpen={setModalOpen} isNew={setNewTag}/> : "" }
         { loading? "Cargando..." : 
           <div>
             <div className='table-card'>
@@ -33,7 +44,7 @@ export const Tags = () => {
                 </thead>
                 <tbody>
                   { body.data.map((el, idx) => 
-                    <tr className='h-7'>
+                    <tr className='h-7' key={`tag-${idx}`}>
                         <td> 
                           <div className='flex justify-center items-center content-center flex-wrap'>
                             <Chip index={idx} label={el.label}/> 
