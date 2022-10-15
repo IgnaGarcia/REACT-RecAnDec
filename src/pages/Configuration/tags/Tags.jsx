@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react'
-import { UserContext } from '../../contexts/UserContext'
-import { getTags } from '../../api/TagsService'
-import { Chip } from '../../components/Chip'
-import { useFetch } from '../../hooks/useFetch'
+import { UserContext } from '../../../contexts/UserContext'
+import { getTags } from '../../../api/TagsService'
+import { Chip } from '../../../components/Chip'
+import { useFetch } from '../../../hooks/useFetch'
 
 export const Tags = () => {
   const { user } = useContext(UserContext)

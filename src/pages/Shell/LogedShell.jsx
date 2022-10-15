@@ -14,7 +14,7 @@ import { RecordsList } from '../Records/RecordsList'
 import { Sidebar } from './Sidebar'
 import { Footer } from './Footer'
 import { Home } from '../Home/Home'
-import { Tags } from '../Configuration/Tags'
+import { Tags } from '../Configuration/tags/Tags'
 
 export const LogedShell = () => {
     const { user } = useContext(UserContext)
