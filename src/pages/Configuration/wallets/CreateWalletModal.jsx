@@ -18,6 +18,14 @@ export const CreateWalletModal = ({ toggleOpen, isNew }) => {
   const response = useLazyFetch()
 
   const saveWallet = () => {
+    if(!formState.label) {
+        setError("El Nombre no puede estar vacio")
+        return
+    }
+    if(!formState.alias){
+        setError("El Alias no puede estar vacio")
+        return
+    }
     response.run(postWallet(user, formState))
   }
 
