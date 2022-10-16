@@ -37,6 +37,6 @@ export const Wallets = () => {
   return (
     <ConfigurationTemplate CreateModal={CreateWalletModal}  tableHead={tableHead} tableBody={tableBody} get={getWallets}
       pieTitle={"Gastos por Billetera"} linesTitle={"Historial por Billetera"} groupBy={"wallet"} 
-      title={"Billetera"} createTitle={"Nueva Billetera"}/>
+      title={"Billeteras"} createTitle={"Nueva Billetera"}/>
   )
 }
