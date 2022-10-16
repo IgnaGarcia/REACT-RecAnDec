@@ -3,8 +3,9 @@ import { UserContext } from '../../contexts/UserContext'
 import { useLazyFetch } from '../../hooks/useLazyFetch'
 import { PiePlot } from '../../components/PiePlot' 
 import { LinesPlot } from '../../components/LinesPlot'
+import { BarsPlot } from '../../components/BarsPlot'
 
-export const ConfigurationTemplate = ({ CreateModal, get, tableHead, tableBody, pieTitle, linesTitle, title, createTitle, groupBy }) => {
+export const ConfigurationTemplate = ({ CreateModal, get, tableHead, tableBody, pieTitle, linesTitle, barTitle, title, createTitle, groupBy }) => {
   const { user } = useContext(UserContext)
   const [modalOpen, setModalOpen] = useState(false)
   const [isNew, setNew] = useState(true)
@@ -43,10 +44,17 @@ export const ConfigurationTemplate = ({ CreateModal, get, tableHead, tableBody, 
               </table>
             </div>
           </div>
-            <PiePlot title={pieTitle} groupBy={groupBy} 
-                filterList={() => gettedList()} />
-            <LinesPlot title={linesTitle} groupBy={groupBy}  
-                filterList={() => gettedList()} />
+            { pieTitle?
+              <PiePlot title={pieTitle} groupBy={groupBy} 
+                  filterList={() => gettedList()} /> : ""
+            }
+            { linesTitle?
+              <LinesPlot title={linesTitle} groupBy={groupBy}  
+                  filterList={() => gettedList()} /> : ""
+            }
+            { barTitle?
+              <BarsPlot title={barTitle} /> : ""
+            }
           </>
         }
     </div>

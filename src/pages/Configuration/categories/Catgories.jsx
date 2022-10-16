@@ -18,7 +18,7 @@ export const Categories = () => {
   </tr>
 
   const tableBody = (el, idx) => {
-    return <tr className='h-7' key={`tag-${idx}`}>
+    return <tr className='h-7' key={`category-${idx}`}>
         <td> 
           <div className='flex justify-center items-center content-center flex-wrap'>
             <Chip index={idx} label={el.label}/> 
