@@ -28,7 +28,7 @@ export const CreateTagModal = ({ toggleOpen, isNew }) => {
             setError("Nombre o Alias ya existente entre tus etiquetas")
         } else {
             alert("Etiqueta Creada!");
-            tags.data.push(tagResponse.body)
+            tags.data.push(tagResponse.body.data)
             saveTags(tags.data)
             isNew(true)
             toggleOpen(false)
