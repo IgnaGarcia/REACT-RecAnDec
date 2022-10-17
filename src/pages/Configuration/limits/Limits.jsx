@@ -1,17 +1,31 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+import { UserContext } from '../../../contexts/UserContext'
+import { useLazyFetch } from '../../../hooks/useLazyFetch'
 import { Chip } from '../../../components/Chip'
 import { LimitModal } from './LimitModal'
 import { ConfigurationTemplate } from '../ConfigurationTemplate'
 import { getLimites } from '../../../api/LimitsService'
 
 export const Limits = () => {
+  const { user } = useContext(UserContext)
+  const deleteResponse = useLazyFetch()
   const getPeriod = (el) => {
     return `${el.month}/${el.year}`
   }
 
   const deleteLimit = (el) => {
-    console.log(el)
+    deleteResponse.run(deleteLimit(user, el._id))
   }
+
+  useEffect(() => {
+    if(!deleteResponse.loading && (deleteResponse.error || deleteResponse.body)){
+        if (deleteResponse.error) {
+            alert("Error al Enviar");
+        } else {
+            alert("Limite Eliminado");
+        }
+    }
+}, [deleteResponse.loading])
 
   const editLimit = (el) => {
     console.log(el)

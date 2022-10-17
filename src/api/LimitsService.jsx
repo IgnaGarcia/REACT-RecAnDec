@@ -13,6 +13,17 @@ export const postLimit = (user, limit) => {
     return { url, options }
 }
 
+export const deleteLimit = (user, limit) => {
+    let url = `${BASE_URL}/limits/${limit}`
+    let options = {
+        method: 'DELETE',
+        headers: {
+            "x-access-token": user.token
+        }
+    }
+    return { url, options }
+}
+
 export const getLimites = (user) => {
     let url = `${BASE_URL}/limits`
     let options = {
