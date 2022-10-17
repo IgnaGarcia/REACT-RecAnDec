@@ -1,19 +1,21 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../../contexts/UserContext'
 import { useLazyFetch } from '../../../hooks/useLazyFetch'
 import { Chip } from '../../../components/Chip'
 import { LimitModal } from './LimitModal'
 import { ConfigurationTemplate } from '../ConfigurationTemplate'
-import { getLimites } from '../../../api/LimitsService'
+import { getLimites, deleteLimit } from '../../../api/LimitsService'
+import { EditLimitModal } from './EditLimitModal'
 
 export const Limits = () => {
   const { user } = useContext(UserContext)
   const deleteResponse = useLazyFetch()
+  const [editOpen, setEditOpen] = useState(false)
   const getPeriod = (el) => {
     return `${el.month}/${el.year}`
   }
 
-  const deleteLimit = (el) => {
+  const onDeleteLimit = (el) => {
     deleteResponse.run(deleteLimit(user, el._id))
   }
 
@@ -25,11 +27,7 @@ export const Limits = () => {
             alert("Limite Eliminado");
         }
     }
-}, [deleteResponse.loading])
-
-  const editLimit = (el) => {
-    console.log(el)
-  }
+  }, [deleteResponse.loading])
 
   const tableHead = <tr>
     <th className='rounded-tl-xl'> Categoria </th>
@@ -50,9 +48,10 @@ export const Limits = () => {
         <td className='border-l h-full'> {el.acum} </td>
         <td className='border-l h-full'> {getPeriod(el)} </td>
         <td className='border-l h-full'> 
-            <button className='btn' onClick={() => deleteLimit(el)}> Borrar </button>
-            <button className='btn' onClick={() => editLimit(el)}> Editar </button>
+            <button className='btn' onClick={() => onDeleteLimit(el)}> Borrar </button>
+            <button className='btn' onClick={() => setEditOpen(true)}> Editar </button>
         </td>
+        { editOpen? <EditLimitModal toggleOpen={setEditOpen} limit={el}/> : "" }
     </tr>
   }
 

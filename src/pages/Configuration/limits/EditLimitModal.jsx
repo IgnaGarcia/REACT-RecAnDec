@@ -4,16 +4,16 @@ import { ConfigContext } from '../../../contexts/ConfigContext'
 import { useLazyFetch } from '../../../hooks/useLazyFetch'
 import { useSimpleSelect } from '../../../hooks/useSimpleSelect'
 import { Modal } from '../../../components/Modal'
-import { postLimit } from '../../../api/LimitsService'
+import { updateLimit } from '../../../api/LimitsService'
 import { useForm } from '../../../hooks/useForm'
 import Select from 'react-select'
 
-export const LimitModal = ({ toggleOpen, isNew }) => {
+export const EditLimitModal = ({ toggleOpen, limit }) => {
   const { user } = useContext(UserContext)
   const { categories } = useContext(ConfigContext)
-  const { selected, onSelectChange } = useSimpleSelect()
+  const { selected, onSelectChange } = useSimpleSelect(limit.category)
   const { formState, onInputChange } = useForm({
-    amount: null
+    amount: limit.amount
   })
   const [formError, setError] = useState(null)
   const response = useLazyFetch()
@@ -22,7 +22,7 @@ export const LimitModal = ({ toggleOpen, isNew }) => {
     return { value: el._id, label: el.label }
   })
 
-  const saveLimit = () => {
+  const changeLimit = () => {
     if(!selected || selected.length < 0) {
         setError("Debe seleccionar una categoria")
         return
@@ -34,7 +34,7 @@ export const LimitModal = ({ toggleOpen, isNew }) => {
         setError("El Monto no puede ser negativo")
         return
     }
-    response.run(postLimit(user, {amount: formState.amount, category: selected.value}))
+    response.run(updateLimit(user, {_id: limit._id, amount: formState.amount, category: selected.value}))
   }
 
   useEffect(() => {
@@ -44,16 +44,15 @@ export const LimitModal = ({ toggleOpen, isNew }) => {
         } else if (response.body.code === 11000) {
             setError("Limite ya existente para esa categoria")
         } else {
-            alert("Limite Creado!");
-            isNew(true)
+            alert("Limite Actualizado!");
             toggleOpen(false)
         }
     }
 }, [response.loading])
 
   return (
-    <Modal onPost={saveLimit} toggleOpen={toggleOpen}>
-        <h2 className='title mb-8'> Crear Limite </h2>
+    <Modal onPost={changeLimit} toggleOpen={toggleOpen}>
+        <h2 className='title mb-8'> Editar Limite </h2>
         
         <div>
             <div className='mb-3'>

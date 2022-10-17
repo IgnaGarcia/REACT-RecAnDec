@@ -20,11 +20,6 @@ npm install react-router react-router-dom
 
 ## TO-DO List
 - Configuracion Inicial
-     - Limites
-        - Delete de Limite
-        - Update de Limite
-        - Form de Limite
-        - Post de Limite
      - Comandos
         - Tabla de Comandos
         - Get de Comandos

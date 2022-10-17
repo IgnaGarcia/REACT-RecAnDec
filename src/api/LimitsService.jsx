@@ -13,6 +13,19 @@ export const postLimit = (user, limit) => {
     return { url, options }
 }
 
+export const updateLimit = (user, limit) => {
+    let url = `${BASE_URL}/limits/${limit._id}`
+    let options = {
+        method: 'PUT',
+        headers: {
+            "x-access-token": user.token,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(limit)
+    }
+    return { url, options }
+}
+
 export const deleteLimit = (user, limit) => {
     let url = `${BASE_URL}/limits/${limit}`
     let options = {
