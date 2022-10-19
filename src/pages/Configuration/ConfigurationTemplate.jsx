@@ -33,15 +33,16 @@ export const ConfigurationTemplate = ({ CreateModal, get, tableHead, tableBody, 
           <>
           <div>
             <div className='table-card'>
+              { body && body.data ?
               <table className='table table-auto rounded-full min-w-full'>
                 <thead className='text-back-300 bg-back-600 h-7 rounded-t-full'>
                   { tableHead }
                 </thead>
                 <tbody>
-                  { body.data.map((el, idx) => tableBody(el, idx)
-                  )}
+                   {body.data.map((el, idx) => tableBody(el, idx))} 
                 </tbody>
               </table>
+              : <div className='mx-auto py-4 w-full'> No hay elementos </div>}
             </div>
           </div>
             { pieTitle?

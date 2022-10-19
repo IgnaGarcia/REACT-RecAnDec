@@ -1,9 +1,18 @@
-import React from 'react'
-import { getCommand } from '../../../api/CommandsService'
+import React, { useState, useContext} from 'react'
+import { UserContext } from '../../../contexts/UserContext'
+import { useLazyFetch } from '../../../hooks/useLazyFetch'
+import { getCommand, deleteCommand } from '../../../api/CommandsService'
 import { Chip } from '../../../components/Chip'
 import { ConfigurationTemplate } from '../ConfigurationTemplate'
 
 export const Telegram = () => {
+  const { user } = useContext(UserContext)
+  const deleteResponse = useLazyFetch()
+  const [editOpen, setEditOpen] = useState(false)
+
+  const onDeleteCommand = (el) => {
+    deleteResponse.run(deleteCommand(user, el._id))
+  }
 
   const tableHead = <tr>
     <th className='rounded-tl-xl'> Para Egresos </th>
@@ -38,7 +47,8 @@ export const Telegram = () => {
           : "" }
         </td>
         <td className='border-l h-full'> 
-            Editar | Borrar 
+            <button className='btn' onClick={() => onDeleteCommand(el)}> Borrar </button>
+            <button className='btn' onClick={() => setEditOpen(true)}> Editar </button>
         </td>
     </tr>
   }
