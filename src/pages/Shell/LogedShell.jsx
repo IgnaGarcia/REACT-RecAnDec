@@ -1,17 +1,20 @@
 import React, { useContext } from 'react'
 import { Route, Routes } from "react-router-dom"
+import { useFetch } from '../../hooks/useFetch'
+
+import { getCategories } from '../../api/CategoriesService'
+import { getTags } from '../../api/TagsService'
+import { getWallets } from '../../api/WalletService'
+import { ConfigContext } from '../../contexts/ConfigContext'
+import { UserContext } from '../../contexts/UserContext'
+
 import { Configuration } from '../Configuration/Configuration'
 import { Records } from '../Records/Records'
 import { RecordsList } from '../Records/RecordsList'
 import { Sidebar } from './Sidebar'
 import { Footer } from './Footer'
 import { Home } from '../Home/Home'
-import { useFetch } from '../../hooks/useFetch'
-import { getCategories } from '../../api/CategoriesService'
-import { getTags } from '../../api/TagsService'
-import { getWallets } from '../../api/WalletService'
-import { ConfigContext } from '../../contexts/ConfigContext'
-import { UserContext } from '../../contexts/UserContext'
+import { Tags } from '../Configuration/tags/Tags'
 
 export const LogedShell = () => {
     const { user } = useContext(UserContext)
@@ -35,7 +38,7 @@ export const LogedShell = () => {
                     </Route>
                     <Route exact strict path='configuracion' element={ <Configuration /> }>
                         <Route exact strict path='categorias' element={ <div>cat</div> }/>
-                        <Route exact strict path='etiquetas' element={ <div>tag</div> }/>
+                        <Route exact strict path='etiquetas' element={ <Tags /> }/>
                         <Route exact strict path='billeteras' element={ <div>wall</div> }/>
                         <Route exact strict path='limites' element={ <div>limites</div> }/>
                         <Route exact strict path='telegram' element={ <div>tg</div> }/>
