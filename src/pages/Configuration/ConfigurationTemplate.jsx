@@ -44,17 +44,21 @@ export const ConfigurationTemplate = ({ CreateModal, get, tableHead, tableBody, 
               : <div className='mx-auto py-4 w-full'> No hay elementos </div>}
             </div>
           </div>
-            { pieTitle?
-              <PiePlot title={pieTitle} groupBy={groupBy} 
-                  filterList={() => gettedList()} /> : ""
-            }
-            { linesTitle?
-              <LinesPlot title={linesTitle} groupBy={groupBy}  
-                  filterList={() => gettedList()} /> : ""
-            }
-            { barTitle?
-              <BarsPlot title={barTitle} /> : ""
-            }
+            { body && body.data && body.data.length ?
+            <>
+              { pieTitle?
+                <PiePlot title={pieTitle} groupBy={groupBy} 
+                    filterList={() => gettedList()} /> : ""
+              }
+              { linesTitle?
+                <LinesPlot title={linesTitle} groupBy={groupBy}  
+                    filterList={() => gettedList()} /> : ""
+              }
+              { barTitle?
+                <BarsPlot title={barTitle} /> : ""
+              }
+            </>
+            : "" }
           </>
         }
         { modalOpen? <CreateModal toggleOpen={setModalOpen} isNew={setNew}/> : "" }
