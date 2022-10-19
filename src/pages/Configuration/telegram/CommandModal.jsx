@@ -11,17 +11,20 @@ import Select from 'react-select'
 export const CommandModal = ({ toggleOpen, isNew, command }) => {
   const { user } = useContext(UserContext)
   const { categories, tags, wallets } = useContext(ConfigContext)
-  const categorySelect = useSimpleSelect()
-  const tagSelect = useSimpleSelect()
-  const walletSelect = useSimpleSelect()
   const { formState, onInputChange } = useForm({
     expense: true
   })
+  let categoriesOut = categories.data.filter(el => el.isOut).map(el => {return { value: el._id, label: el.label }})
+  let categoriesIn = categories.data.filter(el => !el.isOut).map(el => {return { value: el._id, label: el.label }})
+  const [categoriesToShow, setCategoriesToShow] = useState([])
+  const categorySelect = useSimpleSelect()
+  const tagSelect = useSimpleSelect()
+  const walletSelect = useSimpleSelect()
   const [formError, setError] = useState(null)
   const response = useLazyFetch()
 
   let gettedList = (list) => list.data.map(el => {
-    return { value: el._id, label: el.label }
+        return { value: el._id, label: el.label }
   })
 
   const saveCommand = () => {
@@ -47,7 +50,11 @@ export const CommandModal = ({ toggleOpen, isNew, command }) => {
             toggleOpen(false)
         }
     }
-}, [response.loading])
+  }, [response.loading])
+
+  useEffect(() => {
+    formState.expense? setCategoriesToShow(categoriesIn) : setCategoriesToShow(categoriesOut)
+  }, [formState.expense])
 
   return (
     <Modal onPost={saveCommand} toggleOpen={toggleOpen}>
@@ -55,7 +62,7 @@ export const CommandModal = ({ toggleOpen, isNew, command }) => {
         
         <div>
             <div className='mb-3'>
-                <Select options={gettedList(categories)} value={categorySelect.selected} isSearchable 
+                <Select options={categoriesToShow} value={categorySelect.selected} isSearchable 
                         onChange={categorySelect.onSelectChange} hideSelectedOptions={false} />
             </div>
             <div className='mb-3'>
