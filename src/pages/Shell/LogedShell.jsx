@@ -15,6 +15,7 @@ import { Sidebar } from './Sidebar'
 import { Footer } from './Footer'
 import { Home } from '../Home/Home'
 import { Tags } from '../Configuration/tags/Tags'
+import { Wallets } from '../Configuration/wallets/Wallets'
 
 export const LogedShell = () => {
     const { user } = useContext(UserContext)
@@ -39,7 +40,7 @@ export const LogedShell = () => {
                     <Route exact strict path='configuracion' element={ <Configuration /> }>
                         <Route exact strict path='categorias' element={ <div>cat</div> }/>
                         <Route exact strict path='etiquetas' element={ <Tags /> }/>
-                        <Route exact strict path='billeteras' element={ <div>wall</div> }/>
+                        <Route exact strict path='billeteras' element={ <Wallets /> }/>
                         <Route exact strict path='limites' element={ <div>limites</div> }/>
                         <Route exact strict path='telegram' element={ <div>tg</div> }/>
                     </Route>

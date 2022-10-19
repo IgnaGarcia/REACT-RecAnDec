@@ -20,11 +20,6 @@ npm install react-router react-router-dom
 
 ## TO-DO List
 - Configuracion Inicial
-     - Billeteras
-        - Tabla de Billeteras
-        - Get de Billeteras
-        - Form de Billeteras
-        - Post de Billeteras
      - Categorias
         - Tabla de Categorias
         - Get de Categorias
