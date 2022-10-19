@@ -8,18 +8,19 @@ import { postCommand } from '../../../api/CommandsService'
 import { useForm } from '../../../hooks/useForm'
 import Select from 'react-select'
 
-export const CommandModal = ({ toggleOpen, isNew }) => {
+export const EditCommandModal = ({ toggleOpen, command }) => {
+    console.log(command)
   const { user } = useContext(UserContext)
   const { categories, tags, wallets } = useContext(ConfigContext)
   const { formState, onInputChange } = useForm({
-    expense: true
+    expense: command.expense
   })
   let categoriesOut = categories.data.filter(el => el.isOut).map(el => {return { value: el._id, label: el.label }})
   let categoriesIn = categories.data.filter(el => !el.isOut).map(el => {return { value: el._id, label: el.label }})
   const [categoriesToShow, setCategoriesToShow] = useState([])
-  const categorySelect = useSimpleSelect()
-  const tagSelect = useSimpleSelect()
-  const walletSelect = useSimpleSelect()
+  const categorySelect = useSimpleSelect(command && command.category? {value: command.category._id, label: command.category.label} : null)
+  const tagSelect = useSimpleSelect(command && command.tags? command.tags.map(el => { return {value: el._id, label: el.label}}) : null)
+  const walletSelect = useSimpleSelect(command && command.wallet? {value: command.wallet._id, label: command.wallet.label} : null)
   const [formError, setError] = useState(null)
   const response = useLazyFetch()
 
@@ -45,8 +46,7 @@ export const CommandModal = ({ toggleOpen, isNew }) => {
         if (response.error) {
             alert("Error al Enviar");
         } else {
-            alert("Comando Creado!");
-            isNew(true)
+            alert("Comando Editado!");
             toggleOpen(false)
         }
     }
@@ -58,7 +58,7 @@ export const CommandModal = ({ toggleOpen, isNew }) => {
 
   return (
     <Modal onPost={saveCommand} toggleOpen={toggleOpen}>
-        <h2 className='title mb-8'> Crear Comando </h2>
+        <h2 className='title mb-8'> Editar Comando </h2>
         
         <div>
             <div className='mb-3'>

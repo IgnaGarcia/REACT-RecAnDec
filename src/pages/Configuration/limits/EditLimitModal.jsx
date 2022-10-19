@@ -9,6 +9,7 @@ import { useForm } from '../../../hooks/useForm'
 import Select from 'react-select'
 
 export const EditLimitModal = ({ toggleOpen, limit }) => {
+  console.log(limit)
   const { user } = useContext(UserContext)
   const { categories } = useContext(ConfigContext)
   const { selected, onSelectChange } = useSimpleSelect(limit.category)

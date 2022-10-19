@@ -5,6 +5,7 @@ import { getCommand, deleteCommand } from '../../../api/CommandsService'
 import { Chip } from '../../../components/Chip'
 import { ConfigurationTemplate } from '../ConfigurationTemplate'
 import { CommandModal } from './CommandModal'
+import { EditCommandModal } from './EditCommandModal'
 
 export const Telegram = () => {
   const { user } = useContext(UserContext)
@@ -51,6 +52,7 @@ export const Telegram = () => {
             <button className='btn' onClick={() => onDeleteCommand(el)}> Borrar </button>
             <button className='btn' onClick={() => setEditOpen(true)}> Editar </button>
         </td>
+        { editOpen? <EditCommandModal toggleOpen={setEditOpen} command={el}/> : "" }
     </tr>
   }
 
