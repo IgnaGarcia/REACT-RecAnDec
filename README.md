@@ -20,11 +20,6 @@ npm install react-router react-router-dom
 
 ## TO-DO List
 - Configuracion Inicial
-     - Categorias
-        - Tabla de Categorias
-        - Get de Categorias
-        - Form de Categoria
-        - Post de Categoria
      - Limites
         - Tabla de Limites
         - Get de Limites

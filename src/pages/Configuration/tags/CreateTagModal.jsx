@@ -17,6 +17,14 @@ export const CreateTagModal = ({ toggleOpen, isNew }) => {
   const tagResponse = useLazyFetch()
 
   const saveTag = () => {
+    if(!formState.label) {
+        setError("El Nombre no puede estar vacio")
+        return
+    }
+    if(!formState.alias){
+        setError("El Alias no puede estar vacio")
+        return
+    }
     tagResponse.run(postTag(user, formState))
   }
 

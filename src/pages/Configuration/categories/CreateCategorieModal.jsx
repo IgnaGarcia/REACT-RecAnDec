@@ -3,21 +3,21 @@ import { UserContext } from '../../../contexts/UserContext'
 import { ConfigContext } from '../../../contexts/ConfigContext'
 import { useLazyFetch } from '../../../hooks/useLazyFetch'
 import { Modal } from '../../../components/Modal'
-import { postWallet } from '../../../api/WalletService'
+import { postCategorie } from '../../../api/CategoriesService'
 import { useForm } from '../../../hooks/useForm'
 
-export const CreateWalletModal = ({ toggleOpen, isNew }) => {
+export const CreateCategorieModal = ({ toggleOpen, isNew }) => {
   const { user } = useContext(UserContext)
-  const { wallets, saveWallets } = useContext(ConfigContext)
+  const { categories, saveCategories } = useContext(ConfigContext)
   const { formState, onInputChange } = useForm({
-    label: "",
-    alias: "",
-    acum: 0
+    label: null,
+    alias: null,
+    isOut: true
   })
   const [formError, setError] = useState(null)
   const response = useLazyFetch()
 
-  const saveWallet = () => {
+  const saveCategorie = () => {
     if(!formState.label) {
         setError("El Nombre no puede estar vacio")
         return
@@ -26,7 +26,7 @@ export const CreateWalletModal = ({ toggleOpen, isNew }) => {
         setError("El Alias no puede estar vacio")
         return
     }
-    response.run(postWallet(user, formState))
+    response.run(postCategorie(user, formState))
   }
 
   useEffect(() => {
@@ -34,11 +34,11 @@ export const CreateWalletModal = ({ toggleOpen, isNew }) => {
         if (response.error) {
             alert("Error al Enviar");
         } else if (response.body.code === 11000) {
-            setError("Nombre o Alias ya existente entre tus billeteras")
+            setError("Nombre o Alias ya existente entre tus categorias")
         } else {
             alert("Billetera Creada!");
-            wallets.data.push(response.body.data)
-            saveWallets(wallets.data)
+            categories.data.push(response.body.data)
+            saveCategories(categories.data)
             isNew(true)
             toggleOpen(false)
         }
@@ -46,24 +46,24 @@ export const CreateWalletModal = ({ toggleOpen, isNew }) => {
 }, [response.loading])
 
   return (
-    <Modal onPost={saveWallet} toggleOpen={toggleOpen}>
-        <h2 className='title mb-8'> Crear Billetera </h2>
+    <Modal onPost={saveCategorie} toggleOpen={toggleOpen}>
+        <h2 className='title mb-8'> Crear Categoria </h2>
         
-        <div className='w-3/5 m-auto text-right'>
+        <div>
             <div className='mb-3'>
                 <label htmlFor="label" className='mr-6'>Nombre:</label>
                 <input placeholder="Nombre" name="label" id="label" 
-                    value={formState.label} onChange={onInputChange} required/>
+                    value={formState.label} onChange={onInputChange}/>
             </div>
             <div className='mb-3'>
                 <label htmlFor="alias" className='mr-6'>Alias:</label>
                 <input placeholder="Alias" name="alias" id="alias" 
-                    value={formState.alias} onChange={onInputChange} required/>
+                    value={formState.alias} onChange={onInputChange}/>
             </div>
             <div className='mb-8'>
-                <label htmlFor="acum" className='mr-6'>Dinero Actual:</label>
-                <input type="number" min={1} placeholder="Dinero" name="acum" id="acum" 
-                    value={formState.acum} onChange={onInputChange}/>
+                <input type="checkbox" name="isOut" id="isOut"
+                    checked={formState.isOut} onChange={onInputChange}/>
+                <label htmlFor="isOut" className='ml-6'>Para Egresos</label>
                 {formError? 
                     <div className='mt-2 text-xs text-center text-red-600'> {formError} </div> 
                 : ""}

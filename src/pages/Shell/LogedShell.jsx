@@ -16,6 +16,7 @@ import { Footer } from './Footer'
 import { Home } from '../Home/Home'
 import { Tags } from '../Configuration/tags/Tags'
 import { Wallets } from '../Configuration/wallets/Wallets'
+import { Categories } from '../Configuration/categories/Catgories'
 
 export const LogedShell = () => {
     const { user } = useContext(UserContext)
@@ -38,7 +39,7 @@ export const LogedShell = () => {
                         <Route exact strict path='ingresos' element={ <RecordsList pageN={1}/> }/>
                     </Route>
                     <Route exact strict path='configuracion' element={ <Configuration /> }>
-                        <Route exact strict path='categorias' element={ <div>cat</div> }/>
+                        <Route exact strict path='categorias' element={ <Categories/> }/>
                         <Route exact strict path='etiquetas' element={ <Tags /> }/>
                         <Route exact strict path='billeteras' element={ <Wallets /> }/>
                         <Route exact strict path='limites' element={ <div>limites</div> }/>
