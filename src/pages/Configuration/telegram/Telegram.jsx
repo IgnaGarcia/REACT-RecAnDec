@@ -57,7 +57,16 @@ export const Telegram = () => {
   }
 
   return (
-    <ConfigurationTemplate CreateModal={CommandModal}  tableHead={tableHead} tableBody={tableBody} get={getCommand}
-      title={"Comandos"} createTitle={"Nuevo Comando"}/>
+    <>
+      {user.telegramId[0] === '_'?
+       <div className='w-10/12 px-4 pt-12 mx-auto flex justify-evenly items-center text-lg'> 
+          Codigo de Sincronizacion: 
+          <span className='bg-back-200/75 rounded-lg py-4 px-12'>{user.telegramId}</span>
+       </div> 
+       : ""
+      }
+      <ConfigurationTemplate CreateModal={CommandModal}  tableHead={tableHead} tableBody={tableBody} get={getCommand}
+        title={"Comandos"} createTitle={"Nuevo Comando"}/>
+    </>
   )
 }
