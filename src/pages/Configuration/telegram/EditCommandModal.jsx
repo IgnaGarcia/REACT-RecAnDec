@@ -9,7 +9,6 @@ import { useForm } from '../../../hooks/useForm'
 import Select from 'react-select'
 
 export const EditCommandModal = ({ toggleOpen, command }) => {
-    console.log(command)
   const { user } = useContext(UserContext)
   const { categories, tags, wallets } = useContext(ConfigContext)
   const { formState, onInputChange } = useForm({
