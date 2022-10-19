@@ -25,7 +25,7 @@ export const getCommand = (user) => {
 }
 
 export const deleteCommand = (user, command) => {
-    let url = `${BASE_URL}/commands/${command._id}`
+    let url = `${BASE_URL}/commands/${command}`
     let options = {
         method: 'DELETE',
         headers: {

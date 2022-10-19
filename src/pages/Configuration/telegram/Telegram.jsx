@@ -4,6 +4,7 @@ import { useLazyFetch } from '../../../hooks/useLazyFetch'
 import { getCommand, deleteCommand } from '../../../api/CommandsService'
 import { Chip } from '../../../components/Chip'
 import { ConfigurationTemplate } from '../ConfigurationTemplate'
+import { CommandModal } from './CommandModal'
 
 export const Telegram = () => {
   const { user } = useContext(UserContext)
@@ -54,7 +55,7 @@ export const Telegram = () => {
   }
 
   return (
-    <ConfigurationTemplate CreateModal={null}  tableHead={tableHead} tableBody={tableBody} get={getCommand}
+    <ConfigurationTemplate CreateModal={CommandModal}  tableHead={tableHead} tableBody={tableBody} get={getCommand}
       title={"Comandos"} createTitle={"Nuevo Comando"}/>
   )
 }
