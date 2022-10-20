@@ -14,26 +14,31 @@ export const RecordsList = ({ isOut, pageN=1 }) => {
     <div className="flex flex-col w-10/12 mx-auto">
         <h2 className='title my-6'> { isOut? "Egresos" : "Ingresos" }</h2>
         
+        
         { loading? "Cargando..." : 
           <div>
             <div className='table-card'>
-              <table className='table table-auto rounded-full min-w-full'>
-                <thead className='text-back-300 bg-back-600 h-7 rounded-t-full'>
-                  <tr>
-                    <th className='rounded-tl-xl'> Fecha </th>
-                    <th className='border-l border-back-500'> Monto </th>
-                    <th className='border-l border-back-500'> Categoria </th>
-                    <th className='border-l border-back-500'> Etiquetas </th>
-                    <th className='border-l border-back-500'> Billetera </th>
-                    <th className="border-l border-back-500 rounded-tr-xl"> Acciones </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  { body.data.map(el => <RecordRow record={el} key={el._id}/>) }
-                </tbody>
+              { body && body.data && body.data.length ?
+                <table className='table table-auto rounded-full min-w-full'>
+                  <thead className='text-back-300 bg-back-600 h-7 rounded-t-full'>
+                      <tr>
+                          <th className='rounded-tl-xl'> Fecha </th>
+                          <th className='border-l border-back-500'> Monto </th>
+                          <th className='border-l border-back-500'> Categoria </th>
+                          <th className='border-l border-back-500'> Etiquetas </th>
+                          <th className='border-l border-back-500'> Billetera </th>
+                          <th className="border-l border-back-500 rounded-tr-xl"> Acciones </th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      { body.data.map(el => <RecordRow record={el} key={el._id}/>) }
+                  </tbody>
               </table>
+              : <div className='mx-auto py-4 w-full'> No hay elementos </div>}
             </div>
-            <PageCarousel page={page} onPageChange={setPage} minPage={1} maxPage={body.paging.last} />
+            { body && body.data && body.data.length ?
+              <PageCarousel page={page} onPageChange={setPage} minPage={1} maxPage={body.paging.last} />
+            : "" }
           </div>
         }
 

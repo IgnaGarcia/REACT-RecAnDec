@@ -18,15 +18,15 @@ export const SignIn = () => {
   const form = <div className='w-2/3'>
   <div className='mb-6 flex flex-col'>
       <label htmlFor="name"> Nombre </label>
-      <input name="name" value={formState.name} onChange={onInputChange}/>
+      <input name="name" value={formState.name} onChange={onInputChange} className="text-back-700"/>
   </div>
     <div className='mb-6 flex flex-col'>
         <label htmlFor="email"> Correo electronico </label>
-        <input name="email" value={formState.email} onChange={onInputChange}/>
+        <input name="email" value={formState.email} onChange={onInputChange} className="text-back-700"/>
     </div>
     <div className='flex flex-col'>
         <label htmlFor="password"> Constraseña </label>
-        <input type="password" name="password" value={formState.password} onChange={onInputChange}/>
+        <input type="password" name="password" value={formState.password} onChange={onInputChange} className="text-back-700"/>
         {formError? 
             <div className='mt-3 text-xs text-center text-red-300'> {formError} </div> 
         : ""}
