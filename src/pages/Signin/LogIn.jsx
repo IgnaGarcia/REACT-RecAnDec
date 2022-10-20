@@ -6,7 +6,7 @@ import { useLazyFetch } from '../../hooks/useLazyFetch';
 import { TemplateForm } from './TemplateForm';
 
 export const LogIn = () => {
-  const { user, saveUser } = useContext(UserContext)
+  const { saveUser } = useContext(UserContext)
   const lazyFetch = useLazyFetch()
   const {formState, onInputChange} = useForm({
     email: "",
@@ -17,13 +17,11 @@ export const LogIn = () => {
   const form = <div className='w-2/3'>
     <div className='mb-6 flex flex-col'>
         <label htmlFor="email"> Correo electronico </label>
-        <input name="email" id="email" 
-            value={formState.email} onChange={onInputChange}/>
+        <input name="email" value={formState.email} onChange={onInputChange}/>
     </div>
     <div className='flex flex-col'>
         <label htmlFor="password"> Constraseña </label>
-        <input type="password" name="password" id="password" 
-            value={formState.password} onChange={onInputChange}/>
+        <input type="password" name="password" value={formState.password} onChange={onInputChange}/>
         {formError? 
             <div className='mt-3 text-xs text-center text-red-300'> {formError} </div> 
         : ""}
@@ -34,7 +32,7 @@ export const LogIn = () => {
         if(!lazyFetch.loading && (lazyFetch.error || lazyFetch.body)){
             if (lazyFetch.error) {
                 alert("Error al Enviar");
-            } else if (lazyFetch.body.code != 200) {
+            } else if (lazyFetch.body.code === 403) {
                 setError("Usuario o contraseña invalidos")
             } else {
                 console.log(lazyFetch.body)
@@ -44,7 +42,6 @@ export const LogIn = () => {
     }, [lazyFetch.loading])
 
     const onSubmit = () => {
-        console.log("submit")
         if(!formState.email || formState.email.length < 7) {
             setError("Debe ingresar un correo valido")
             return
@@ -53,7 +50,6 @@ export const LogIn = () => {
             setError("Debe ingresar una contraseña valido")
             return
         }
-        console.log(login(formState))
         lazyFetch.run(login(formState))
     }
 
