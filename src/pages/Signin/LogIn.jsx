@@ -32,7 +32,7 @@ export const LogIn = () => {
         if(!lazyFetch.loading && (lazyFetch.error || lazyFetch.body)){
             if (lazyFetch.error) {
                 alert("Error al Enviar");
-            } else if (lazyFetch.body.code === 403) {
+            } else if (lazyFetch.body.code === 403 || lazyFetch.body.code === 500) {
                 setError("Usuario o contraseña invalidos")
             } else {
                 console.log(lazyFetch.body)
