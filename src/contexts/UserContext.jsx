@@ -14,7 +14,12 @@ const UserProvider = ({ children }) => {
         window.localStorage.setItem("user", JSON.stringify(input))
     }
 
-    const contx = { user, saveUser }
+    const closeSesion = () => {
+        setUser(null)
+        window.localStorage.removeItem("user")
+    }
+
+    const contx = { user, saveUser, closeSesion }
 
     return (
         <UserContext.Provider value={ contx } >

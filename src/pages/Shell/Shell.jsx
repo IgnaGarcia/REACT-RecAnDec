@@ -9,15 +9,6 @@ import { LogedShell } from './LogedShell'
 export const Shell = () => {
     const { user, saveUser } = useContext(UserContext)
 
-    const setUser = async() => {
-        let token = await generateToken(process.env.REACT_APP_USER_ID)
-        saveUser({
-            "name": "Igna Garcia",
-            "telegramId": "982840555",
-            "createDate": "2022-09-12T02:32:45.919+00:00",
-            "_id": process.env.REACT_APP_USER_ID
-        }, token)
-    }
 
     const updateUser = async() => {
         let body = await refreshToken(user)

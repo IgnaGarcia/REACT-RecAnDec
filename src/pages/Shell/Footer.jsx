@@ -8,7 +8,7 @@ import { ConfigContext } from '../../contexts/ConfigContext'
 import { useState } from 'react'
 
 export const Footer = () => {
-    const { user } = useContext(UserContext)
+    const { user, closeSesion } = useContext(UserContext)
     const { categories, tags, wallets } = useContext(ConfigContext)
     const recordResponse = useLazyFetch()
     let categoriesOut = []
@@ -60,8 +60,10 @@ export const Footer = () => {
 
     return (
         <footer className="flex items-center fixed w-screen bottom-0 h-16">
-            <div className="w-60 bg-back-800 text-back-100 py-4 px-5">
-                { user.name }
+            <div className="w-60 bg-back-800 text-back-100 text-md py-4 px-5 flex justify-between items-center">
+                <span>{ user.name }</span>
+                <button onClick={closeSesion}
+                    className='text-left text-xs py-1 px-3 bg-back-600 w-min rounded-full hover:bg-red-700'> Salir </button>
             </div>
             <div className='flex items-center bg-back-200 px-3 flex-1 h-full'>
                 <form className="flex justify-evenly items-center w-full" onSubmit={handleSubmit} action="#">
