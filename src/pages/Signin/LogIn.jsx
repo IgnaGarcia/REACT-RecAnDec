@@ -14,18 +14,18 @@ export const LogIn = () => {
   })
   const [formError, setError] = useState(null)
 
-  const form = <div>
-    <div>
+  const form = <div className='w-2/3'>
+    <div className='mb-6 flex flex-col'>
         <label htmlFor="email"> Correo electronico </label>
         <input name="email" id="email" 
             value={formState.email} onChange={onInputChange}/>
     </div>
-    <div>
+    <div className='flex flex-col'>
         <label htmlFor="password"> Constraseña </label>
         <input type="password" name="password" id="password" 
             value={formState.password} onChange={onInputChange}/>
         {formError? 
-            <div className='mt-2 text-xs text-center text-red-600'> {formError} </div> 
+            <div className='mt-3 text-xs text-center text-red-300'> {formError} </div> 
         : ""}
     </div>
   </div>
@@ -34,6 +34,8 @@ export const LogIn = () => {
         if(!lazyFetch.loading && (lazyFetch.error || lazyFetch.body)){
             if (lazyFetch.error) {
                 alert("Error al Enviar");
+            } else if (lazyFetch.body.code != 200) {
+                setError("Usuario o contraseña invalidos")
             } else {
                 console.log(lazyFetch.body)
                 saveUser(lazyFetch.body.data, lazyFetch.body.token)

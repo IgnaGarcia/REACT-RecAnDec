@@ -22,6 +22,9 @@ export const signin = (req) => {
     let url = `${BASE_URL}/users/register`
     let options = {
         method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify(req)
     }
     return { url, options }

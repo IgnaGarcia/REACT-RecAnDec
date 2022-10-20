@@ -18,7 +18,8 @@ export const Onboarding = () => {
   })
 
   return (
-    <div className='w-full h-full flex justify-between'>
+    <div className='w-screen h-screen flex justify-evenly items-center bg-back-100'>
+       <LogIn/>
        <LogIn/>
     </div>
   )

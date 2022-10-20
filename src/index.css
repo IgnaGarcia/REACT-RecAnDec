@@ -13,6 +13,9 @@
     .btn {
         @apply py-2 px-4 text-back-100 bg-back-700 hover:bg-back-800 rounded-lg hover:cursor-pointer
     }
+    .btn-secondary {
+        @apply py-2 px-4 text-back-800 bg-back-300 hover:bg-back-400 rounded-lg hover:cursor-pointer
+    }
     .btn-disabled {
         @apply py-2 px-4 text-back-100 bg-back-400 rounded-lg
     }
