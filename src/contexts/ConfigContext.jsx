@@ -37,7 +37,16 @@ const ConfigProvider = ({ children }) => {
 
     const getWallet = (id) => wallets.data.findIndex(el => el._id === id)
 
-    const contx = { categories, tags, wallets, saveCategories, saveTags, saveWallets, getCategorie, getTag, getWallet }
+    const clear = () => {
+        saveCategories([])
+        window.localStorage.removeItem("categories")
+        saveTags([])
+        window.localStorage.removeItem("tags")
+        saveWallets([])
+        window.localStorage.removeItem("wallets")
+    }
+
+    const contx = { categories, tags, wallets, saveCategories, saveTags, saveWallets, getCategorie, getTag, getWallet, clear }
 
     return (
         <ConfigContext.Provider value={ contx } >
