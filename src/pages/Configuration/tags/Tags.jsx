@@ -7,7 +7,9 @@ import { ConfigurationTemplate } from '../ConfigurationTemplate'
 export const Tags = () => {
   const getDate = (dateStr) => {
     let date = new Date(dateStr)
-    return `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`
+    return dateStr? 
+      `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}` 
+      : "-"
   }
 
   const tableHead = <tr>

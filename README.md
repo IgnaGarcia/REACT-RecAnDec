@@ -19,7 +19,21 @@ npm install react-router react-router-dom
 
 
 ## TO-DO List 
-- Login/Signin
-    - Formulario con Estilos
-    - Post login
-    - Post signin 
+- Select
+ - Mostrar solo cantidad seleccionada(footer, crear comando, editar comando, crear limite, editar limite, pieplot, linesplot)
+ - Width
+- Table
+ - Boton Editar en Egresos/Ingresos
+ - Chips con w-2/3(Registros, Categorias, Etiquetas, Billeteras, Limites, Comandos)
+ - Espacio entre botones crear y editar(limites)
+- Configs
+ - Centrar o ensanchar card de graficos
+- Inputs
+ - Crear categoria con estilo de input
+ - Crear etiqueta con estilo de input
+ - Crear billetera con estilo de input
+ - Crear limite con estilo de input
+ - Editar limite con estilo de input
+ - Crear etiqueta con estilo de input
+- Estilos de pagina de telegram
+- Crear limite solo muestr categorias de salida

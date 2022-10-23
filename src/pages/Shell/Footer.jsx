@@ -6,6 +6,8 @@ import { UserContext } from '../../contexts/UserContext'
 import { postRecord } from '../../api/RecordService'
 import { ConfigContext } from '../../contexts/ConfigContext'
 import { useState } from 'react'
+import Select from 'react-select'
+import { useSimpleSelect } from '../../hooks/useSimpleSelect'
 
 export const Footer = () => {
     const { user, closeSesion } = useContext(UserContext)
@@ -18,19 +20,30 @@ export const Footer = () => {
     const { formState, onInputChange, reset } = useForm({
         isIn: false,
         amount: "",
-        category: "",
         tags: "",
         wallet: ""
     })
+    const catSelect = useSimpleSelect()
+    const tagSelect = useSimpleSelect()
+    const walletSelect = useSimpleSelect()
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        let wallet = formState.wallet !== "" ? formState.wallet : null
-        let tags = formState.tags !== "" ? formState.tags : null
+        if(!formState.amount || formState.amount <= 0 ) {
+            alert("Debe ingresar un monto")
+            return
+        }
+        console.log(catSelect)
+        if(catSelect.selected <= 0 || !catSelect.selected.value) {
+            alert("Debe seleccionar una categoria")
+            return
+        }
+        let wallet = walletSelect.selected && walletSelect.selected.value ? walletSelect.selected.value : null
+        let tags = tagSelect.selected && tagSelect.selected.value ? [tagSelect.selected.value] : null
 
         let req = {
             "amount": formState.amount,
-            "category": formState.category,
+            "category": catSelect.selected.value,
             "isOut": !formState.isIn,
             wallet,
             tags
@@ -54,9 +67,13 @@ export const Footer = () => {
     }, [formState.isIn])
 
     const setCategories = () => {
-        categoriesOut = categories.data.filter(el => el.isOut)
-        categoriesIn = categories.data.filter(el => !el.isOut)
+        categoriesOut = categories.data.filter(el => el.isOut).map(el => { return { value: el._id, label: el.label } })
+        categoriesIn = categories.data.filter(el => !el.isOut).map(el => { return { value: el._id, label: el.label } })
     }
+
+    let gettedList = (list) => list.data.map(el => {
+        return { value: el._id, label: el.label }
+      })
 
     const onCloseSesion = () => {
         clear()
@@ -73,56 +90,35 @@ export const Footer = () => {
             <div className='flex items-center bg-back-200 px-3 flex-1 h-full'>
                 <form className="flex justify-evenly items-center w-full" onSubmit={handleSubmit} action="#">
                     <div>
-                        <input type="checkbox" name="isIn" id="isIn" 
+                        <input type="checkbox" name="isIn" id="isIn"
                             value={formState.isIn} onChange={onInputChange}/>
                         <label htmlFor="isIn"> Es Ingreso? </label>
                     </div>
 
-                    <input type="number" placeholder="Monto" name="amount" id="amount" min={1}  
+                    <input type="number" placeholder="Monto" name="amount" id="amount" min={1} className='input' 
                         value={formState.amount} onChange={onInputChange}/>
 
                     { categories.loading?
                         <span>Cargando...</span>
                         : <>
                             {setCategories()}
-                            <select name="category" id="categorySelector"  required
-                                value={formState.category} onChange={onInputChange}>
-                                <option value="" disabled> -- Categoria -- </option>
-                                {
-                                    categoriesToShow.map(el => 
-                                        <option value={el._id} key={el._id}> {el.label} </option> 
-                                    )
-                                }
-                            </select>
+                            <Select options={categoriesToShow} value={catSelect.selected} isSearchable menuPlacement='top'
+                                onChange={catSelect.onSelectChange} hideSelectedOptions={false} />
                         </>
                     }
                     
                     { tags.loading?
                         <span>Cargando...</span>
                         : 
-                        <select name="tags" id="tagSelector"
-                            value={formState.tags} onChange={onInputChange}>
-                            <option value="" disabled> -- Etiquetas -- </option>
-                            {
-                                tags.data.map(el => 
-                                    <option value={el._id} key={el._id}> {el.label} </option> 
-                                )
-                            }
-                        </select>
+                        <Select options={gettedList(tags)} value={tagSelect.selected} isSearchable menuPlacement='top'
+                            onChange={tagSelect.onSelectChange} hideSelectedOptions={false} />
                     }
 
                     { wallets.loading?
                         <span>Cargando...</span>
                         : 
-                        <select name="wallet" id="walletSelector"
-                            value={formState.wallet} onChange={onInputChange}>
-                            <option value="" disabled> -- Billetera -- </option>
-                            {
-                                wallets.data.map(el => 
-                                    <option value={el._id} key={el._id}> {el.label} </option> 
-                                )
-                            }
-                        </select>
+                        <Select options={gettedList(wallets)} value={walletSelect.selected} isSearchable menuPlacement='top'
+                            onChange={walletSelect.onSelectChange} hideSelectedOptions={false} />
                     }
                     { 
                         recordResponse.loading? <button className='btn-disabled' disabled> "Enviando..." </button>   
