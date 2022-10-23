@@ -24,4 +24,4 @@ npm install react-router react-router-dom
  - Width
 - Estilos de pagina de telegram
 - Crear limite solo muestr categorias de salida
-- ajustar width del modal
+- Modal editar registro mas espaciado
