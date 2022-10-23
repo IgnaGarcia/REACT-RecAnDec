@@ -19,7 +19,7 @@ export const EditLimitModal = ({ toggleOpen, limit }) => {
   const [formError, setError] = useState(null)
   const response = useLazyFetch()
 
-  let gettedList = () => categories.data.map(el => {
+  let gettedList = () => categories.data.filter(el => el.isOut).map(el => {
     return { value: el._id, label: el.label }
   })
 
