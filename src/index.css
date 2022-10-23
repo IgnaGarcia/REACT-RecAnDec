@@ -55,6 +55,12 @@
     .title {
         @apply text-3xl col-span-2 px-6
     }
+    .title-2 {
+        @apply text-2xl col-span-2 px-6
+    }
+    .title-3 {
+        @apply text-xl col-span-2 px-6
+    }
     .modal {
         @apply fixed overflow-x-hidden overflow-y-hidden top-0 left-0 right-0 z-50 w-full h-full bg-back-900/50 flex justify-center items-center text-center
     }
