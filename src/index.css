@@ -23,7 +23,7 @@
         @apply py-2 px-4 text-back-100 bg-back-400 rounded-lg
     }
     .card {
-        @apply py-6 px-8 text-back-700 bg-back-100 rounded-lg max-w-prose
+        @apply py-6 px-8 text-back-700 bg-back-100 rounded-lg
     }
     .tab {
         @apply flex justify-end items-center bg-back-100

@@ -22,8 +22,6 @@ npm install react-router react-router-dom
 - Select
  - Mostrar solo cantidad seleccionada(footer, crear comando, editar comando, crear limite, editar limite, pieplot, linesplot)
  - Width
-- Configs
- - Centrar o ensanchar card de graficos
 - Inputs
  - Crear categoria con estilo de input
  - Crear etiqueta con estilo de input

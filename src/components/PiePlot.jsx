@@ -38,6 +38,7 @@ export const PiePlot = ({ title, groupBy, filterList }) => {
                     </div>
                     { data.length === 0? <div className="text-lg flex-1 flex justify-center items-center">No hay datos en esta seleccion</div> :
                         <PieChart
+                            className='m-auto'
                             width={500}
                             height={300}
                             >

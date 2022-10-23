@@ -28,6 +28,7 @@ export const BarsPlot = ({ title }) => {
                     {mapSummary()}
                     <h2 className='text-xl mb-6'> {title} </h2>
                     <BarChart
+                        className='m-auto'
                         layout='vertical'
                         width={550}
                         height={300}

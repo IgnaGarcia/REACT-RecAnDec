@@ -56,6 +56,7 @@ export const LinesPlot = ({ title, groupBy, filterList }) => {
                         : ""}
                     </div>
                     <LineChart
+                        className='m-auto'
                         width={500}
                         height={300}
                         data={data}>
