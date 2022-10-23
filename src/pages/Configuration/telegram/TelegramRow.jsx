@@ -38,8 +38,8 @@ export const TelegramRow = ({el, idx}) => {
             : "" }
         </td>
         <td className='border-l h-full'> 
-            <button className='btn' onClick={() => onDeleteCommand(el)}> Borrar </button>
-            <button className='btn' onClick={() => setEditOpen(true)}> Editar </button>
+            <button className='btn-mini' onClick={() => setEditOpen(true)}> Editar </button>
+            <button className='btn-mini bg-red-600' onClick={() => onDeleteCommand(el)}> Borrar </button>
         </td>
         { editOpen? <EditCommandModal toggleOpen={setEditOpen} command={el}/> : "" }
     </tr>

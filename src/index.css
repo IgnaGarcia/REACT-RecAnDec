@@ -13,6 +13,9 @@
     .btn {
         @apply py-2 px-4 text-back-100 bg-back-700 hover:bg-back-800 rounded-lg hover:cursor-pointer
     }
+    .btn-mini {
+        @apply py-1 px-4 m-1 text-back-100 bg-back-700 hover:bg-back-800 rounded-lg hover:cursor-pointer
+    }
     .btn-secondary {
         @apply py-2 px-4 text-back-800 bg-back-300 hover:bg-back-400 rounded-lg hover:cursor-pointer
     }
@@ -47,7 +50,7 @@
         @apply bg-back-50
     }
     .chip {
-        @apply px-2 w-min rounded-xl border text-xs
+        @apply px-2 rounded-xl border text-xs
     }
     .title {
         @apply text-3xl col-span-2 px-6

@@ -37,8 +37,8 @@ export const LimitRow = ({el, idx}) => {
         <td className='border-l h-full'> {el.acum} </td>
         <td className='border-l h-full'> {getPeriod(el)} </td>
         <td className='border-l h-full'> 
-            <button className='btn' onClick={() => onDeleteLimit(el)}> Borrar </button>
-            <button className='btn' onClick={() => setEditOpen(true)}> Editar </button>
+            <button className='btn-mini' onClick={() => setEditOpen(true)}> Editar </button>
+            <button className='btn-mini bg-red-600' onClick={() => onDeleteLimit(el)}> Borrar </button>
         </td>
         { editOpen? <EditLimitModal toggleOpen={setEditOpen} limit={el}/> : "" }
     </tr>
