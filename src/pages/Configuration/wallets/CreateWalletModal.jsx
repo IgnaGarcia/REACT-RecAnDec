@@ -52,17 +52,17 @@ export const CreateWalletModal = ({ toggleOpen, isNew }) => {
         <div className='w-3/5 m-auto text-right'>
             <div className='mb-3'>
                 <label htmlFor="label" className='mr-6'>Nombre:</label>
-                <input placeholder="Nombre" name="label" id="label" 
+                <input placeholder="Nombre" name="label" id="label" className='input'
                     value={formState.label} onChange={onInputChange} required/>
             </div>
             <div className='mb-3'>
                 <label htmlFor="alias" className='mr-6'>Alias:</label>
-                <input placeholder="Alias" name="alias" id="alias" 
+                <input placeholder="Alias" name="alias" id="alias" className='input'
                     value={formState.alias} onChange={onInputChange} required/>
             </div>
             <div className='mb-8'>
                 <label htmlFor="acum" className='mr-6'>Dinero Actual:</label>
-                <input type="number" min={1} placeholder="Dinero" name="acum" id="acum" 
+                <input type="number" min={1} placeholder="Dinero" name="acum" id="acum" className='input'
                     value={formState.acum} onChange={onInputChange}/>
                 {formError? 
                     <div className='mt-2 text-xs text-center text-red-600'> {formError} </div> 

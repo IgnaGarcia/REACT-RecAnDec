@@ -51,12 +51,12 @@ export const CreateTagModal = ({ toggleOpen, isNew }) => {
         <div className='w-1/2 m-auto text-right'>
             <div className='mb-3'>
                 <label htmlFor="label" className='mr-6'>Nombre:</label>
-                <input placeholder="Nombre" name="label" id="label" 
+                <input placeholder="Nombre" name="label" id="label" className='input'
                     value={formState.label} onChange={onInputChange} required/>
             </div>
             <div className='mb-8'>
                 <label htmlFor="alias" className='mr-6'>Alias:</label>
-                <input placeholder="Alias" name="alias" id="alias" 
+                <input placeholder="Alias" name="alias" id="alias" className='input'
                     value={formState.alias} onChange={onInputChange} required/>
                 {formError? 
                     <div className='mt-2 text-xs text-center text-red-600'> {formError} </div> 

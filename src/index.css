@@ -35,7 +35,7 @@
         @apply px-6 py-5 hover:bg-back-300
     }
     .input {
-        @apply py-1 px-2 text-back-900 bg-back-100 rounded-md
+        @apply py-1 px-2 text-back-900 rounded-md bg-back-50 border border-back-300
     }
     .table-card {
         @apply text-back-700 bg-back-100 rounded-xl text-sm text-center 

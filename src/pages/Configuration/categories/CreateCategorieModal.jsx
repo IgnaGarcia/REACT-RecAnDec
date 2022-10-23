@@ -52,12 +52,12 @@ export const CreateCategorieModal = ({ toggleOpen, isNew }) => {
         <div>
             <div className='mb-3'>
                 <label htmlFor="label" className='mr-6'>Nombre:</label>
-                <input placeholder="Nombre" name="label" id="label" 
+                <input placeholder="Nombre" name="label" id="label"  className='input'
                     value={formState.label} onChange={onInputChange}/>
             </div>
             <div className='mb-3'>
                 <label htmlFor="alias" className='mr-6'>Alias:</label>
-                <input placeholder="Alias" name="alias" id="alias" 
+                <input placeholder="Alias" name="alias" id="alias"   className='input'
                     value={formState.alias} onChange={onInputChange}/>
             </div>
             <div className='mb-8'>

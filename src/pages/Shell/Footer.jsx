@@ -95,7 +95,7 @@ export const Footer = () => {
                         <label htmlFor="isIn"> Es Ingreso? </label>
                     </div>
 
-                    <input type="number" placeholder="Monto" name="amount" id="amount" min={1} className='input' 
+                    <input type="number" placeholder="Monto" name="amount" id="amount" min={1} className='input'
                         value={formState.amount} onChange={onInputChange}/>
 
                     { categories.loading?

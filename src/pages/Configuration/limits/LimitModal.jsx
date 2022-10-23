@@ -62,7 +62,7 @@ export const LimitModal = ({ toggleOpen, isNew }) => {
             </div>
             <div className='mb-8'>
                 <label htmlFor="amount" className='mr-6'>Monto:</label>
-                <input type="number" placeholder="Monto" name="amount" id="amount" 
+                <input type="number" placeholder="Monto" name="amount" id="amount" className='input'
                     value={formState.amount} onChange={onInputChange}/>
                     {formError? 
                         <div className='mt-2 text-xs text-center text-red-600'> {formError} </div> 
