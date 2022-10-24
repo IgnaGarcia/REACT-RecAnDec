@@ -48,11 +48,11 @@ export const ConfigurationTemplate = ({ CreateModal, get, tableHead, tableBody, 
             <>
               { pieTitle?
                 <PiePlot title={pieTitle} groupBy={groupBy} 
-                    filterList={() => gettedList()} /> : ""
+                    filterList={gettedList()} /> : ""
               }
               { linesTitle?
                 <LinesPlot title={linesTitle} groupBy={groupBy}  
-                    filterList={() => gettedList()} /> : ""
+                    filterList={gettedList()} /> : ""
               }
               { barTitle?
                 <BarsPlot title={barTitle} /> : ""
