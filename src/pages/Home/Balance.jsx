@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { getBalance } from '../../api/RecordService';
 import { UserContext } from '../../contexts/UserContext';
 import { useFetch } from '../../hooks/useFetch';
@@ -6,18 +6,20 @@ import { useFetch } from '../../hooks/useFetch';
 export const Balance = () => {
     const { user } = useContext(UserContext)
     const { loading, body } = useFetch(getBalance(user))
+    const [balance, setBalanceData] = useState(null)
 
+    const isBalance = () => balance != null && balance.length
+ 
     return (
         <>
         {
             loading? "Cargando..." :
                 <div className='card py-8 flex flex-col justify-around'>
-                    { body.data[0]?
-                        <div className='flex justify-between items-center mb-6'>
-                            <h2 className='text-2xl'> Balance del mes {body.data[0]._id.month}/{body.data[0]._id.year}</h2>
-                            <h3 className='text-3xl font-semibold'> { body.data[0].income - body.data[0].expense } </h3>
-                        </div>
-                     : ""}
+                    { body.data[0]? setBalanceData(body.data) : "" }
+                    <div className='flex justify-between items-center mb-6'>
+                        <h2 className='text-2xl'> Balance del mes {isBalance()? `${balance[0]._id.month}/${balance[0]._id.year}` : "-"}</h2>
+                        <h3 className='text-3xl font-semibold'> {isBalance()? `${balance[0].income}/${balance[0].expense}` : "-"} </h3>
+                    </div>
                     <div className='flex justify-between'>
                         <div className='w-2/5'>
                             <h4 className='text-xl font-semibold mb-4'> Egresos </h4>
