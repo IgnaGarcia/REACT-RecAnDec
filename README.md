@@ -17,15 +17,7 @@ npx tailwindcss init -p
 npm install react-router react-router-dom
 ```
 
-
 ## TO-DO List
-- Configuracion Inicial
-     - Comandos
-        - Tabla de Comandos
-        - Get de Comandos
-        - Post de Comando
-        - Update de Comando
-        - Delete de Comandp     
 - Login/Signin
     - Formulario con Estilos
     - Post login

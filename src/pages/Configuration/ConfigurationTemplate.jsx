@@ -28,35 +28,40 @@ export const ConfigurationTemplate = ({ CreateModal, get, tableHead, tableBody, 
           <h2 className='title mb-6'> { title } </h2>
           <button className='btn text-sm' onClick={() => setModalOpen(true)}> { createTitle } </button>
         </div>
-        { modalOpen? <CreateModal toggleOpen={setModalOpen} isNew={setNew}/> : "" }
         { loading? "Cargando..." : 
           <>
           <div>
             <div className='table-card'>
+              { body && body.data && body.data.length ?
               <table className='table table-auto rounded-full min-w-full'>
                 <thead className='text-back-300 bg-back-600 h-7 rounded-t-full'>
                   { tableHead }
                 </thead>
                 <tbody>
-                  { body.data.map((el, idx) => tableBody(el, idx)
-                  )}
+                   {body.data.map((el, idx) => tableBody(el, idx))} 
                 </tbody>
               </table>
+              : <div className='mx-auto py-4 w-full'> No hay elementos </div>}
             </div>
           </div>
-            { pieTitle?
-              <PiePlot title={pieTitle} groupBy={groupBy} 
-                  filterList={() => gettedList()} /> : ""
-            }
-            { linesTitle?
-              <LinesPlot title={linesTitle} groupBy={groupBy}  
-                  filterList={() => gettedList()} /> : ""
-            }
-            { barTitle?
-              <BarsPlot title={barTitle} /> : ""
-            }
+            { body && body.data && body.data.length ?
+            <>
+              { pieTitle?
+                <PiePlot title={pieTitle} groupBy={groupBy} 
+                    filterList={() => gettedList()} /> : ""
+              }
+              { linesTitle?
+                <LinesPlot title={linesTitle} groupBy={groupBy}  
+                    filterList={() => gettedList()} /> : ""
+              }
+              { barTitle?
+                <BarsPlot title={barTitle} /> : ""
+              }
+            </>
+            : "" }
           </>
         }
+        { modalOpen? <CreateModal toggleOpen={setModalOpen} isNew={setNew}/> : "" }
     </div>
   )
 }
