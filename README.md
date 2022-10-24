@@ -17,8 +17,7 @@ npx tailwindcss init -p
 npm install react-router react-router-dom
 ```
 
-
-## TO-DO List 
+## TO-DO List
 - Login/Signin
     - Formulario con Estilos
     - Post login
