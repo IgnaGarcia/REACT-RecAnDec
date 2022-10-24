@@ -17,6 +17,7 @@ import { Home } from '../Home/Home'
 import { Tags } from '../Configuration/tags/Tags'
 import { Wallets } from '../Configuration/wallets/Wallets'
 import { Categories } from '../Configuration/categories/Catgories'
+import { Limits } from '../Configuration/limits/Limits'
 
 export const LogedShell = () => {
     const { user } = useContext(UserContext)
@@ -42,7 +43,7 @@ export const LogedShell = () => {
                         <Route exact strict path='categorias' element={ <Categories/> }/>
                         <Route exact strict path='etiquetas' element={ <Tags /> }/>
                         <Route exact strict path='billeteras' element={ <Wallets /> }/>
-                        <Route exact strict path='limites' element={ <div>limites</div> }/>
+                        <Route exact strict path='limites' element={ <Limits /> }/>
                         <Route exact strict path='telegram' element={ <div>tg</div> }/>
                     </Route>
                 </Routes>

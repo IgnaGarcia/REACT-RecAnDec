@@ -36,7 +36,7 @@ export const CreateCategorieModal = ({ toggleOpen, isNew }) => {
         } else if (response.body.code === 11000) {
             setError("Nombre o Alias ya existente entre tus categorias")
         } else {
-            alert("Billetera Creada!");
+            alert("Categoria Creada!");
             categories.data.push(response.body.data)
             saveCategories(categories.data)
             isNew(true)
