@@ -58,6 +58,7 @@ export const Footer = () => {
                 alert("Error al Enviar");
             } else if (recordResponse.body) {
                 alert("Resgistro Enviado!");
+                if(recordResponse.body.data.msg) alert("ALERTA! " + recordResponse.body.data.msg);
                 reset()
             }
         }

@@ -34,6 +34,7 @@ export default ({ onChange, options, value, ...props }) => (
     options={options}
     value={value}
     onChange={onChange}
+    isClearable
     hideSelectedOptions={false}
     closeMenuOnSelect={false}
     isSearchable
