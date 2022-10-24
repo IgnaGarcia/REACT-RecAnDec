@@ -7,6 +7,7 @@ import { getSummary } from '../api/RecordService';
 import { getColor, renderCustomizedLabel } from '../utils/utils';
 import Select from 'react-select'
 import { PeriodCarousel } from './PeriodCarousel';
+import CustomSelect from './CustomSelect';
 
 export const PiePlot = ({ title, groupBy, filterList }) => {
     const { user } = useContext(UserContext)
@@ -32,8 +33,8 @@ export const PiePlot = ({ title, groupBy, filterList }) => {
                     <div className='flex justify-between w-full mb-6'>
                         <h2 className='flex-1 text-xl'> {title} </h2>
                         {filterList? 
-                                <Select className="flex-1" options={filterList} value={selected} isMulti isSearchable 
-                                    onChange={onSelectChange} hideSelectedOptions={false} />
+                            <CustomSelect className="flex-1" options={filterList} value={selected} 
+                                isMulti onChange={onSelectChange}/>
                         : ""}
                     </div>
                     { data.length === 0? <div className="text-lg flex-1 flex justify-center items-center">No hay datos en esta seleccion</div> :

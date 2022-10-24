@@ -7,6 +7,7 @@ import { Modal } from '../../../components/Modal'
 import { postLimit } from '../../../api/LimitsService'
 import { useForm } from '../../../hooks/useForm'
 import Select from 'react-select'
+import CustomSelect from '../../../components/CustomSelect'
 
 export const LimitModal = ({ toggleOpen, isNew }) => {
   const { user } = useContext(UserContext)
@@ -57,8 +58,7 @@ export const LimitModal = ({ toggleOpen, isNew }) => {
         
         <div>
             <div className='mb-3'>
-                <Select options={gettedList()} value={selected} isSearchable 
-                        onChange={onSelectChange} hideSelectedOptions={false} />
+                <CustomSelect options={gettedList()} value={selected} onChange={onSelectChange} className="w-1/2 m-auto"/>
             </div>
             <div className='mb-8'>
                 <label htmlFor="amount" className='mr-6'>Monto:</label>

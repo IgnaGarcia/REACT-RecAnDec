@@ -8,6 +8,7 @@ import { ConfigContext } from '../../contexts/ConfigContext'
 import { useState } from 'react'
 import Select from 'react-select'
 import { useSimpleSelect } from '../../hooks/useSimpleSelect'
+import CustomSelect from '../../components/CustomSelect'
 
 export const Footer = () => {
     const { user, closeSesion } = useContext(UserContext)
@@ -95,33 +96,33 @@ export const Footer = () => {
                         <label htmlFor="isIn"> Es Ingreso? </label>
                     </div>
 
-                    <input type="number" placeholder="Monto" name="amount" id="amount" min={1} className='input'
+                    <input type="number" placeholder="Monto" name="amount" id="amount" min={1} className='input w-1/6'
                         value={formState.amount} onChange={onInputChange}/>
 
                     { categories.loading?
                         <span>Cargando...</span>
                         : <>
                             {setCategories()}
-                            <Select options={categoriesToShow} value={catSelect.selected} isSearchable menuPlacement='top'
-                                onChange={catSelect.onSelectChange} hideSelectedOptions={false} />
+                            <CustomSelect options={categoriesToShow} value={catSelect.selected} menuPlacement='top'
+                                onChange={catSelect.onSelectChange} placeholder="Categoria" className="w-1/6"/>
                         </>
                     }
                     
                     { tags.loading?
                         <span>Cargando...</span>
                         : 
-                        <Select options={gettedList(tags)} value={tagSelect.selected} isSearchable menuPlacement='top'
-                            onChange={tagSelect.onSelectChange} hideSelectedOptions={false} />
+                        <CustomSelect options={gettedList(tags)} value={tagSelect.selected} menuPlacement='top'
+                            onChange={tagSelect.onSelectChange} placeholder="Etiqueta" className="w-1/6"/>
                     }
 
                     { wallets.loading?
                         <span>Cargando...</span>
                         : 
-                        <Select options={gettedList(wallets)} value={walletSelect.selected} isSearchable menuPlacement='top'
-                            onChange={walletSelect.onSelectChange} hideSelectedOptions={false} />
+                        <CustomSelect options={gettedList(wallets)} value={walletSelect.selected} menuPlacement='top'
+                            onChange={walletSelect.onSelectChange} placeholder="Billetera" className="w-1/6"/>
                     }
                     { 
-                        recordResponse.loading? <button className='btn-disabled' disabled> "Enviando..." </button>   
+                        recordResponse.loading? <button className='btn-disabled w-1/6' disabled> "Enviando..." </button>   
                             : <button className='btn'> Enviar </button>
                     }
                 </form>

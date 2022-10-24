@@ -14,7 +14,7 @@ export const Limits = () => {
     <th className='border-l border-back-500 rounded-tr-xl'> Acciones </th>
   </tr>
 
-  const tableBody = (el, idx) => <LimitRow el={el} idx={idx} />
+  const tableBody = (el, idx) => <LimitRow el={el} idx={idx} key={`limit-${idx}`}/>
 
   return (
     <ConfigurationTemplate CreateModal={LimitModal}  tableHead={tableHead} tableBody={tableBody} get={getLimites}

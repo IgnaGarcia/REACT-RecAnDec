@@ -16,9 +16,3 @@ npx tailwindcss init -p
 ```
 npm install react-router react-router-dom
 ```
-
-
-## TO-DO List 
-- Select
- - Mostrar solo cantidad seleccionada(footer, crear comando, editar comando, crear limite, editar limite, pieplot, linesplot)
- - Width

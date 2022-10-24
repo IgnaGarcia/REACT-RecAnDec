@@ -7,6 +7,7 @@ import { Modal } from '../../../components/Modal'
 import { postCommand } from '../../../api/CommandsService'
 import { useForm } from '../../../hooks/useForm'
 import Select from 'react-select'
+import CustomSelect from '../../../components/CustomSelect'
 
 export const CommandModal = ({ toggleOpen, isNew }) => {
   const { user } = useContext(UserContext)
@@ -62,16 +63,16 @@ export const CommandModal = ({ toggleOpen, isNew }) => {
         
         <div>
             <div className='mb-3'>
-                <Select options={categoriesToShow} value={categorySelect.selected} isSearchable 
-                        onChange={categorySelect.onSelectChange} hideSelectedOptions={false} />
+                <CustomSelect options={categoriesToShow} value={categorySelect.selected} 
+                        onChange={categorySelect.onSelectChange} className="w-1/2 m-auto"/>
             </div>
             <div className='mb-3'>
-                <Select options={gettedList(tags)} value={tagSelect.selected} isSearchable isMulti
-                        onChange={tagSelect.onSelectChange} hideSelectedOptions={false} />
+                <CustomSelect options={gettedList(tags)} value={tagSelect.selected} isMulti
+                        onChange={tagSelect.onSelectChange} className="w-1/2 m-auto" />
             </div>
             <div className='mb-3'>
-                <Select options={gettedList(wallets)} value={walletSelect.selected} isSearchable 
-                        onChange={walletSelect.onSelectChange} hideSelectedOptions={false} />
+                <CustomSelect options={gettedList(wallets)} value={walletSelect.selected} 
+                        onChange={walletSelect.onSelectChange} className="w-1/2 m-auto"/>
             </div>
             <div className='mb-8'>
                 <input type="checkbox" name="expense" id="expense"

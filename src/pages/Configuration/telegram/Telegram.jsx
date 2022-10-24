@@ -67,7 +67,7 @@ export const Telegram = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr className='h-7'>
                 <td>
                   <div className='flex justify-center items-center content-center flex-wrap'>
                     <Chip index={0} label={"Egreso con categoria"}/>
@@ -82,7 +82,7 @@ export const Telegram = () => {
                   <span className='text-green-600'> -alim</span>
                 </td>
               </tr>
-              <tr>
+              <tr className='h-7'>
                 <td>
                   <div className='flex justify-center items-center content-center flex-wrap'>
                     <Chip index={1} label={"Egreso con billetera"}/>
@@ -99,7 +99,7 @@ export const Telegram = () => {
                   <span className='text-indigo-500'> ${wallets.data.length? wallets.data[0].alias : "efectivo"}</span>
                 </td>
               </tr>
-              <tr>
+              <tr className='h-7'>
                 <td>
                   <div className='flex justify-center items-center content-center flex-wrap'>
                     <Chip index={2} label={"Egreso con etiquetas"}/>
@@ -116,7 +116,7 @@ export const Telegram = () => {
                   <span className='text-amber-500'> (recu,luz)</span>
                 </td>
               </tr>
-              <tr>
+              <tr className='h-7'>
                 <td>
                   <div className='flex justify-center items-center content-center flex-wrap'>
                     <Chip index={3} label={"Egreso completo"}/>
@@ -135,7 +135,7 @@ export const Telegram = () => {
                   <span className='text-amber-500'> (recu,luz)</span>
                 </td>
               </tr>
-              <tr>
+              <tr className='h-7'>
                 <td>
                   <div className='flex justify-center items-center content-center flex-wrap'>
                     <Chip index={4} label={"Egreso con Comando"}/>
@@ -163,7 +163,7 @@ export const Telegram = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr className='h-7'>
                 <td>
                   <div className='flex justify-center items-center content-center flex-wrap'>
                     <Chip index={0} label={"Ingreso con categoria"}/>
@@ -178,7 +178,7 @@ export const Telegram = () => {
                   <span className='text-green-600'> -venta</span>
                 </td>
               </tr>
-              <tr>
+              <tr className='h-7'>
                 <td>
                   <div className='flex justify-center items-center content-center flex-wrap'>
                     <Chip index={1} label={"Ingreso con billetera"}/>
@@ -195,7 +195,7 @@ export const Telegram = () => {
                   <span className='text-indigo-500'> ${wallets.data.length? wallets.data[0].alias : "bbva"}</span>
                 </td>
               </tr>
-              <tr>
+              <tr className='h-7'>
                 <td>
                   <div className='flex justify-center items-center content-center flex-wrap'>
                     <Chip index={2} label={"Ingreso con etiquetas"}/>
@@ -212,7 +212,7 @@ export const Telegram = () => {
                   <span className='text-amber-500'> (ext)</span>
                 </td>
               </tr>
-              <tr>
+              <tr className='h-7'>
                 <td>
                   <div className='flex justify-center items-center content-center flex-wrap'>
                     <Chip index={3} label={"Ingreso completo"}/>
@@ -231,7 +231,7 @@ export const Telegram = () => {
                   <span className='text-amber-500'> (recu)</span>
                 </td>
               </tr>
-              <tr>
+              <tr className='h-7'>
                 <td>
                   <div className='flex justify-center items-center content-center flex-wrap'>
                     <Chip index={4} label={"Ingreso con Comando"}/>
