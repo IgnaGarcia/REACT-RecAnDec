@@ -20,7 +20,7 @@ export const LogIn = () => {
         <input name="email" value={formState.email} onChange={onInputChange} className="input text-back-700"/>
     </div>
     <div className='flex flex-col'>
-        <label htmlFor="password"> Constraseña </label>
+        <label htmlFor="password"> Contraseña </label>
         <input type="password" name="password" value={formState.password} onChange={onInputChange} className="input text-back-700"/>
         {formError? 
             <div className='mt-3 text-xs text-center text-red-300'> {formError} </div> 
