@@ -33,14 +33,14 @@ export const ConfigurationTemplate = ({ CreateModal, get, tableHead, tableBody, 
           <div>
             <div className='table-card'>
               { body && body.data && body.data.length ?
-              <table className='table table-auto rounded-full min-w-full'>
-                <thead className='text-back-300 bg-back-600 h-7 rounded-t-full'>
-                  { tableHead }
-                </thead>
-                <tbody>
-                   {body.data.map((el, idx) => tableBody(el, idx))} 
-                </tbody>
-              </table>
+                <table className='table table-auto rounded-full min-w-full'>
+                  <thead className='text-back-300 bg-back-600 h-7 rounded-t-full'>
+                    { tableHead }
+                  </thead>
+                  <tbody>
+                    {body.data.map((el, idx) => tableBody(el, idx))} 
+                  </tbody>
+                </table>
               : <div className='mx-auto py-4 w-full'> No hay elementos </div>}
             </div>
           </div>
@@ -48,11 +48,11 @@ export const ConfigurationTemplate = ({ CreateModal, get, tableHead, tableBody, 
             <>
               { pieTitle?
                 <PiePlot title={pieTitle} groupBy={groupBy} 
-                    filterList={() => gettedList()} /> : ""
+                    filterList={gettedList()} /> : ""
               }
               { linesTitle?
                 <LinesPlot title={linesTitle} groupBy={groupBy}  
-                    filterList={() => gettedList()} /> : ""
+                    filterList={gettedList()} /> : ""
               }
               { barTitle?
                 <BarsPlot title={barTitle} /> : ""

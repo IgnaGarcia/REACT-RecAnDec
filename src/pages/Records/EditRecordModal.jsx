@@ -74,24 +74,35 @@ export const EditRecordModal = ({ record, toggleOpen }) => {
 
   return (
     <Modal onPost={saveRecord} toggleOpen={toggleOpen}>
-        <h2 className='title mb-3'> Editar Registro </h2>
-        <div className='mb-3'> Fecha: {getDate(record.date)} </div>
-        <div className='mb-3'> Monto: ${ record.amount } </div>
-        <div className='flex justify-center items-center content-center flex-wrap mb-3'>
-            Categoria: { categorie? 
-                <Chip index={categorie.index} label={categorie.label} /> 
-            : "" }
-        </div>
+        <h2 className='title mb-8'> Editar Registro </h2>
+        <div className='w-3/5 m-auto'>
+          <div className='mb-3 flex items-center justify-center'> 
+            <span className='mr-6'>Fecha:</span>
+            <input className='input flex-1' value={getDate(record.date)} disabled/>
+          </div>
+          <div className='mb-3 flex items-center justify-center'> 
+            <span className='mr-6'>Monto:</span>
+            <input className='input flex-1' value={`$${ record.amount }`} disabled/>
+          </div>
+          <div className='mb-3 flex items-center justify-center'>
+            <span className='mr-6'>Categoria:</span>
+            <input className='input flex-1' value={ categorie? categorie.label : "" }/>
+          </div>
 
-        <div className='flex justify-center items-center content-center flex-wrap mb-3'>
-            Etiquetas: 
-            <Select options={arrToInput(tags)} value={tagSelect.selected} isMulti isSearchable 
-                onChange={tagSelect.onSelectChange} hideSelectedOptions={false} />
-        </div>
-        <div className='flex justify-center items-center content-center flex-wrap mb-3'>
-            Billeteras: 
-            <Select options={arrToInput(wallets)} value={walletSelect.selected} isSearchable 
-                onChange={walletSelect.onSelectChange} hideSelectedOptions={false} />
+          <div className='mb-3 flex items-center justify-center'>
+            <span className='mr-6'>Etiquetas:</span>
+            <span className='flex-1'>
+              <Select options={arrToInput(tags)} value={tagSelect.selected} isMulti isSearchable 
+                  onChange={tagSelect.onSelectChange} hideSelectedOptions={false} />
+            </span>
+          </div>
+          <div className='mb-8 flex items-center justify-center'>
+            <span className='mr-6'>Billeteras:</span>
+            <span className='flex-1'>
+              <Select options={arrToInput(wallets)} value={walletSelect.selected} isSearchable 
+                  onChange={walletSelect.onSelectChange} hideSelectedOptions={false} />
+            </span>
+          </div>
         </div>
     </Modal>       
   )

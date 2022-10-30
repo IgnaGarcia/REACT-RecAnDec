@@ -68,7 +68,7 @@ export const RecordRow = ({ record }) => {
         </td>
 
         <td className='border-l'>
-            <button onClick={() => setModalOpen(true)}> Editar </button>
+            <button onClick={() => setModalOpen(true)} className='btn-mini'> Editar </button>
         </td>
 
         { modalOpen? <EditRecordModal record={record} toggleOpen={setModalOpen} /> : "" }

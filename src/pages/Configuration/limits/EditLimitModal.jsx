@@ -7,6 +7,7 @@ import { Modal } from '../../../components/Modal'
 import { updateLimit } from '../../../api/LimitsService'
 import { useForm } from '../../../hooks/useForm'
 import Select from 'react-select'
+import CustomSelect from '../../../components/CustomSelect'
 
 export const EditLimitModal = ({ toggleOpen, limit }) => {
   console.log(limit)
@@ -19,7 +20,7 @@ export const EditLimitModal = ({ toggleOpen, limit }) => {
   const [formError, setError] = useState(null)
   const response = useLazyFetch()
 
-  let gettedList = () => categories.data.map(el => {
+  let gettedList = () => categories.data.filter(el => el.isOut).map(el => {
     return { value: el._id, label: el.label }
   })
 
@@ -57,12 +58,11 @@ export const EditLimitModal = ({ toggleOpen, limit }) => {
         
         <div>
             <div className='mb-3'>
-                <Select options={gettedList()} value={selected} isSearchable 
-                        onChange={onSelectChange} hideSelectedOptions={false} />
+                <CustomSelect options={gettedList()} value={selected} onChange={onSelectChange} className="w-1/2 m-auto"/>
             </div>
             <div className='mb-8'>
                 <label htmlFor="amount" className='mr-6'>Monto:</label>
-                <input type="number" placeholder="Monto" name="amount" id="amount" 
+                <input type="number" placeholder="Monto" name="amount" id="amount" className='input'
                     value={formState.amount} onChange={onInputChange}/>
                     {formError? 
                         <div className='mt-2 text-xs text-center text-red-600'> {formError} </div> 

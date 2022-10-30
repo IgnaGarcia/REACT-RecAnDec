@@ -38,12 +38,16 @@ export const Home = () => {
             <LinesPlot title="Historial por Etiquetas" groupBy="tags" 
                 filterList={tagsList} />
 
-            <h2 className='title mt-6'> Billeteras </h2>
-            <PiePlot title="Gastos por Billetera" groupBy="wallet" 
-                filterList={walletsList} />
-            <LinesPlot title="Historial por Billetera" groupBy="wallet" 
-                filterList={walletsList} />
-
+            { wallets && wallets.data && wallets.data.length?
+                <>
+                    <h2 className='title mt-6'> Billeteras </h2>
+                    <PiePlot title="Gastos por Billetera" groupBy="wallet" 
+                        filterList={walletsList} />
+                    <LinesPlot title="Historial por Billetera" groupBy="wallet" 
+                        filterList={walletsList} />
+                </>
+            : ""}
+            
             <h2 className='title mt-6'> Limites </h2>
             <BarsPlot title="Estado de Limites" />
         </div>

@@ -13,11 +13,17 @@
     .btn {
         @apply py-2 px-4 text-back-100 bg-back-700 hover:bg-back-800 rounded-lg hover:cursor-pointer
     }
+    .btn-mini {
+        @apply py-1 px-4 m-1 text-back-100 bg-back-700 hover:bg-back-800 rounded-lg hover:cursor-pointer
+    }
+    .btn-secondary {
+        @apply py-2 px-4 text-back-800 bg-back-300 hover:bg-back-400 rounded-lg hover:cursor-pointer
+    }
     .btn-disabled {
         @apply py-2 px-4 text-back-100 bg-back-400 rounded-lg
     }
     .card {
-        @apply py-6 px-8 text-back-700 bg-back-100 rounded-lg max-w-prose
+        @apply py-6 px-8 text-back-700 bg-back-100 rounded-lg
     }
     .tab {
         @apply flex justify-end items-center bg-back-100
@@ -29,7 +35,7 @@
         @apply px-6 py-5 hover:bg-back-300
     }
     .input {
-        @apply py-1 px-2 text-back-900 bg-back-100 rounded-md
+        @apply py-1 px-2 text-back-900 rounded-md bg-back-50 border border-back-300
     }
     .table-card {
         @apply text-back-700 bg-back-100 rounded-xl text-sm text-center 
@@ -44,10 +50,16 @@
         @apply bg-back-50
     }
     .chip {
-        @apply px-2 w-min rounded-xl border text-xs
+        @apply px-2 rounded-xl border text-xs
     }
     .title {
         @apply text-3xl col-span-2 px-6
+    }
+    .title-2 {
+        @apply text-2xl col-span-2 px-6
+    }
+    .title-3 {
+        @apply text-xl col-span-2 px-6
     }
     .modal {
         @apply fixed overflow-x-hidden overflow-y-hidden top-0 left-0 right-0 z-50 w-full h-full bg-back-900/50 flex justify-center items-center text-center

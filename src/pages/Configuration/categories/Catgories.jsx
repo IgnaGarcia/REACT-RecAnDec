@@ -7,13 +7,15 @@ import { getCategories } from '../../../api/CategoriesService'
 export const Categories = () => {
   const getDate = (dateStr) => {
     let date = new Date(dateStr)
-    return `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`
+    return dateStr? 
+      `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}` 
+      : "-"
   }
 
   const tableHead = <tr>
     <th className='rounded-tl-xl'> Nombre </th>
     <th className='border-l border-back-500'> Alias </th>
-    <th className='border-l border-back-500'> Para Ingresos </th>
+    <th className='border-l border-back-500'> Para Egresos </th>
     <th className='border-l border-back-500 rounded-tr-xl'> Fecha de Creacion </th>
   </tr>
 
