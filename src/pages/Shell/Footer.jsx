@@ -123,7 +123,7 @@ export const Footer = () => {
                             onChange={walletSelect.onSelectChange} placeholder="Billetera" className="w-1/6"/>
                     }
                     { 
-                        recordResponse.loading? <button className='btn-disabled w-1/6' disabled> "Enviando..." </button>   
+                        recordResponse.loading? <button className='btn-disabled w-1/6' disabled> Enviando... </button>   
                             : <button className='btn'> Enviar </button>
                     }
                 </form>

@@ -8,7 +8,7 @@ export const useLazyFetch = () => {
 
     const [status, setStatus] = useState({
         data: null,
-        loading: true,
+        loading: false,
         error: null
     })
 
