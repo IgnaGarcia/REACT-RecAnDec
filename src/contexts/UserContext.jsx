@@ -10,13 +10,13 @@ const UserProvider = ({ children }) => {
 
     const saveUser = (data, token) => {
         let input = {...data, token}
-        setUser(input)
         window.localStorage.setItem("user", JSON.stringify(input))
+        setUser(input)
     }
 
     const closeSesion = () => {
-        setUser(null)
         window.localStorage.removeItem("user")
+        setUser(null)
     }
 
     const contx = { user, saveUser, closeSesion }

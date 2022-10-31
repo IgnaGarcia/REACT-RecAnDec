@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { BrowserRouter } from "react-router-dom"
+import React, { useContext, useState, useEffect } from 'react'
+import { useLocation } from "react-router-dom"
 import { refreshToken } from '../../api/UserService';
 import { UserContext } from '../../contexts/UserContext';
 import { invalidToken } from '../../utils/utils';
@@ -8,20 +8,30 @@ import { LogedShell } from './LogedShell'
 
 export const Shell = () => {
     const { user, saveUser } = useContext(UserContext)
+    const [validToken, setValid] = useState(false)
+    let location = useLocation();
 
     const updateUser = async() => {
         let body = await refreshToken(user)
+        setValid(true)
         saveUser(body.data, body.token)
     }
 
-    if (user && user.token && invalidToken(user)) updateUser()
+    useEffect(() => {
+        if(!validToken) {
+            if (user && user.token && invalidToken(user)) 
+                updateUser()
+            else setValid(true)
+        }
+    }, [validToken])
 
+    useEffect(() => {
+        if (user && user.token && invalidToken(user)) {
+            setValid(false)
+        }
+    }, [location])
+    
     return (
-        <BrowserRouter className='flex'>
-            { user && user.token? 
-                <LogedShell /> 
-                : <Onboarding />
-            }
-        </BrowserRouter>
+        user ? validToken && <LogedShell /> : <Onboarding />
     )
 }
