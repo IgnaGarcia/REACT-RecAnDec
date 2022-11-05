@@ -1,4 +1,4 @@
-import React, { useState, useContext} from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../../../contexts/UserContext'
 import { useLazyFetch } from '../../../hooks/useLazyFetch'
 import { deleteCommand } from '../../../api/CommandsService'
@@ -13,6 +13,16 @@ export const TelegramRow = ({el, idx}) => {
     const onDeleteCommand = (el) => {
         deleteResponse.run(deleteCommand(user, el._id))
     }
+
+    useEffect(() => {
+        if(!deleteResponse.loading && (deleteResponse.error || deleteResponse.body)){
+            if (deleteResponse.error) {
+                alert("Error al Enviar");
+            } else {
+                alert("Comando Eliminado!");
+            }
+        }
+      }, [deleteResponse.loading])
 
     return <tr className='h-7' key={`command-${idx}`}>
         <td> {el.expense? "Si" : "No"} </td>
