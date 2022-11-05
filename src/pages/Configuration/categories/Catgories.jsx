@@ -28,7 +28,7 @@ export const Categories = () => {
         </td>
         <td className='border-l h-full'> 
           <div className='flex justify-center items-center content-center flex-wrap'>
-            <Chip index={idx} label={el.alias}/>
+            <Chip index={idx+1} label={el.alias}/>
           </div>
         </td>
         <td className='border-l h-full'> { el.isOut? "Si" : "No" } </td>
