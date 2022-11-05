@@ -36,7 +36,7 @@ export default ({ onChange, options, value, ...props }) => (
     onChange={onChange}
     isClearable
     hideSelectedOptions={false}
-    closeMenuOnSelect={false}
+    closeMenuOnSelect={true}
     isSearchable
     placeholder="Seleccionar"
     components={{ ValueContainer: CustomSelectContainer }}
