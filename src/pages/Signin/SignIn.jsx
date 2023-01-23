@@ -51,12 +51,12 @@ export const SignIn = () => {
             setError("Debe ingresar un nombre valido")
             return
         }
-        if(!formState.email || formState.email.length < 7) {
+        if(!formState.email || !/\S+@\S+\.\S+/.test(formState.email)) {
             setError("Debe ingresar un correo valido")
             return
         }
-        if(!formState.password || formState.password.length < 3) {
-            setError("Debe ingresar una contraseña valido")
+        if(!formState.password || formState.password.length < 5) {
+            setError("Debe ingresar una contraseña valida, minimo 6 caracteres")
             return
         }
         lazyFetch.run(signin(formState))

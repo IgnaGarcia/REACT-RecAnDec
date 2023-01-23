@@ -78,15 +78,15 @@ export const EditRecordModal = ({ record, toggleOpen }) => {
         <div className='w-3/5 m-auto'>
           <div className='mb-3 flex items-center justify-center'> 
             <span className='mr-6'>Fecha:</span>
-            <input className='input flex-1' value={getDate(record.date)} disabled/>
+            <input className='input flex-1 bg-back-100 border-back-400' value={getDate(record.date)} disabled/>
           </div>
           <div className='mb-3 flex items-center justify-center'> 
             <span className='mr-6'>Monto:</span>
-            <input className='input flex-1' value={`$${ record.amount }`} disabled/>
+            <input className='input flex-1 bg-back-100 border-back-400' value={`$${ record.amount }`} disabled/>
           </div>
           <div className='mb-3 flex items-center justify-center'>
             <span className='mr-6'>Categoria:</span>
-            <input className='input flex-1' value={ categorie? categorie.label : "" }/>
+            <input className='input flex-1 bg-back-100 border-back-400' value={ categorie? categorie.label : "" } disabled/>
           </div>
 
           <div className='mb-3 flex items-center justify-center'>

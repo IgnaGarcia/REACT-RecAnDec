@@ -1,4 +1,4 @@
-import React, { useState, useContext} from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../../../contexts/UserContext'
 import { useLazyFetch } from '../../../hooks/useLazyFetch'
 import { deleteCommand } from '../../../api/CommandsService'
@@ -14,6 +14,16 @@ export const TelegramRow = ({el, idx}) => {
         deleteResponse.run(deleteCommand(user, el._id))
     }
 
+    useEffect(() => {
+        if(!deleteResponse.loading && (deleteResponse.error || deleteResponse.body)){
+            if (deleteResponse.error) {
+                alert("Error al Enviar");
+            } else {
+                alert("Comando Eliminado!");
+            }
+        }
+      }, [deleteResponse.loading])
+
     return <tr className='h-7' key={`command-${idx}`}>
         <td> {el.expense? "Si" : "No"} </td>
         <td className='border-l h-full'> 
@@ -26,14 +36,14 @@ export const TelegramRow = ({el, idx}) => {
         <td className='border-l h-full'> 
             {el.tags?
             <div className='flex justify-center items-center content-center flex-wrap'>
-                {el.tags.map(el => el? <Chip index={el.index} label={el.label} key={`tag-chip-${el.index}-${el.label}`}/> : "")}
+                {el.tags.map((el, index) => el? <Chip index={index} label={el.label} key={`tag-chip-${index}-${el.label}`}/> : "")}
             </div> 
             : "" }
         </td>
         <td className='border-l h-full'> 
             {el.wallet?
             <div className='flex justify-center items-center content-center flex-wrap'>
-                <Chip index={idx} label={el.wallet.label}/>
+                <Chip index={idx+1} label={el.wallet.label}/>
             </div> 
             : "" }
         </td>
